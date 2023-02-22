@@ -19,11 +19,13 @@
 
 	<ItemGroup>
 		<Folder Include="Controllers\" />
-		<Folder Include="Mapper\" />
-		<Folder Include="Models\Dtos\" />
 		<Folder Include="Models\Requests\" />
 		<Folder Include="Models\Responses\" />
 		<Folder Include="Services\Interfaces\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Catalog.Data\Catalog.Data.csproj" />
 	</ItemGroup>
 
 </Project>
