@@ -1,5 +1,6 @@
 ﻿using Catalog.Data.Entities;
 using Catalog.Data.Repositories.Interfaces;
+using Infrastructure.Exceptions;
 using Infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -87,7 +88,9 @@ public class ProductRepository : IProductRepository
 
         if (product is null)
         {
-            _logger.LogWarning($"Product with id ({id}) doesn't exist");
+            string message = $"Product with id ({id}) doesn't exist";
+            _logger.LogWarning(message);
+            throw new BusinessException(message);
         }
 
         return product!;

@@ -1,3 +1,4 @@
+using Infrastructure.Exceptions;
 using Infrastructure.Services.Interfaces;
 
 namespace Infrastructure.Services;
@@ -29,6 +30,10 @@ public abstract class BaseDataService<T>
             await action(cancellationToken);
 
             await transaction.CommitAsync(cancellationToken);
+        }
+        catch (BusinessException)
+        {
+            throw;
         }
         catch (Exception ex)
         {
