@@ -30,7 +30,7 @@ namespace IdentityServer
                 {
                     Scopes = new List<Scope>
                     {
-                        new Scope("catalog.catalogitem"),
+                        new Scope("catalog.products"),
                     },
                 },
                 new ApiResource("basket")
@@ -80,7 +80,7 @@ namespace IdentityServer
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedScopes =
                     {
-                        "catalog.catalogitem"
+                        "catalog.products"
                     },
                     // secret for authentication
                     ClientSecrets =
@@ -100,7 +100,7 @@ namespace IdentityServer
 
                     AllowedScopes =
                     {
-                        "mvc", "catalog.catalogitem"
+                        "mvc", "catalog.products"
                     }
                 },
                 new Client

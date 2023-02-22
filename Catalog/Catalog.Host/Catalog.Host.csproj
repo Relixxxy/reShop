@@ -9,6 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
 		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.1" />
 		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
 		  <PrivateAssets>all</PrivateAssets>
@@ -18,12 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Folder Include="Controllers\" />
-		<Folder Include="Mapper\" />
-		<Folder Include="Models\Dtos\" />
-		<Folder Include="Models\Requests\" />
-		<Folder Include="Models\Responses\" />
-		<Folder Include="Services\Interfaces\" />
+	  <ProjectReference Include="..\Catalog.Data\Catalog.Data.csproj" />
 	</ItemGroup>
 
 </Project>
