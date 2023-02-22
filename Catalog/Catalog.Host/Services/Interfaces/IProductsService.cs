@@ -2,7 +2,7 @@
 
 namespace Catalog.Host.Services.Interfaces;
 
-public interface IProductService
+public interface IProductsService
 {
     Task<ProductDto> GetProductAsync(int id);
     Task<int?> AddProductAsync(string name, string desc, decimal price, int availableStock, string pictureName, string type, string brand);

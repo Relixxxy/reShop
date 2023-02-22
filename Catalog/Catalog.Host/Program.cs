@@ -60,7 +60,7 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 builder.Services.AddTransient<ICatalogService, CatalogService>();
-builder.Services.AddTransient<IProductService, ProductService>();
+builder.Services.AddTransient<IProductsService, ProductsService>();
 
 builder.Services.AddDbContextFactory<ApplicationDbContext>(opts => opts.UseNpgsql(configuration["ConnectionString"]));
 builder.Services.AddScoped<IDbContextWrapper<ApplicationDbContext>, DbContextWrapper<ApplicationDbContext>>();
