@@ -84,7 +84,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<ProductEntity> GetProductByIdAsync(int id)
     {
-        var product = await _context.Products.FirstOrDefaultAsync();
+        var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
         if (product is null)
         {

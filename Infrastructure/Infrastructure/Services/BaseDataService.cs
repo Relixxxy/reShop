@@ -54,6 +54,10 @@ public abstract class BaseDataService<T>
 
             return result;
         }
+        catch (BusinessException)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
             await transaction.RollbackAsync(cancellationToken);
