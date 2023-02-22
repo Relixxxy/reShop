@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  catalog.api:
+    container_name: lde.catalog.api
+    build:
+      context: .
+      dockerfile: Catalog/Catalog.Host/Dockerfile
+    environment:
+       - ASPNETCORE_ENVIRONMENT=Development
+       - ASPNETCORE_URLS=http://+:5000
+       - ConnectionString=server=www.alevelwebsite.com;port=5433;database=catalog;uid=postgres;password=postgres;
+       - Authorization__Authority=http://www.alevelwebsite.com:5002
+       - PathBase=http://www.alevelwebsite.com:5000
+    depends_on:
+      - postgres
+    ports:
+      - 5000:5000
+  identityserver:
+    container_name: lde.identityserver
+    build:
+      context: .
+      dockerfile: IdentityServer/IdentityServer/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5002
+      - CatalogApi=http://www.alevelwebsite.com:5000
+    ports:
+      - 5002:5002
+  nginx:
+    image: nginx
+    container_name: lde.nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./Proxy/gateway/nginx/conf.d:/etc/nginx/conf.d
+      - ./Proxy/assets:/var/www/assets
+  pgadmin4:
+    image: dpage/pgadmin4
+    container_name: lde.pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: postgres
+    depends_on:
+      - postgres
+    ports:
+      - 8001:80 
+  postgres:
+    image: postgres
+    container_name: lde.postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5433:5432
+
+networks:
+  default:
+    driver: bridge
+    internal: false
+    attachable: true
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.0.0/24
+          gateway: 192.168.0.1
