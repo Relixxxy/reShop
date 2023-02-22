@@ -1,7 +1,7 @@
 ﻿using Catalog.Data;
 using Catalog.Data.Entities;
 
-namespace Catalog.Host.Data;
+namespace Catalog.Data;
 
 public static class DbInitializer
 {
