@@ -8,13 +8,13 @@ using Infrastructure.Services.Interfaces;
 
 namespace Catalog.Host.Services;
 
-public class ProductService : BaseDataService<ApplicationDbContext>, IProductService
+public class ProductsService : BaseDataService<ApplicationDbContext>, IProductsService
 {
     private readonly IProductRepository _productRepository;
     private readonly ILogger<CatalogService> _logger;
     private readonly IMapper _mapper;
 
-    public ProductService(
+    public ProductsService(
         IProductRepository productRepository,
         IMapper mapper,
         IDbContextWrapper<ApplicationDbContext> dbContextWrapper,
