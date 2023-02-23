@@ -1,11 +1,10 @@
-﻿using Catalog.Data.Entities;
+﻿using Catalog.Host.Models.Dtos;
 
-namespace Catalog.Data.Repositories.Interfaces;
+namespace Catalog.Host.Services.Interfaces;
 
-public interface IProductRepository
+public interface IProductsService
 {
-    Task<IEnumerable<ProductEntity>> GetProductsByPageAsync(int pageIndex, int pageSize, string? brandFilter, string? typeFilter);
-    Task<ProductEntity> GetProductByIdAsync(int id);
+    Task<ProductDto> GetProductAsync(int id);
     Task<int?> AddProductAsync(string name, string desc, decimal price, int availableStock, string pictureName, string type, string brand);
     Task<bool> UpdateProductAsync(int id, string name, string desc, decimal price, int availableStock, string pictureName, string type, string brand);
     Task<bool> DeleteProductAsync(int id);

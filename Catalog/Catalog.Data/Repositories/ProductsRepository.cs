@@ -1,20 +1,19 @@
 ﻿using Catalog.Data.Entities;
 using Catalog.Data.Repositories.Interfaces;
+using Infrastructure.Exceptions;
 using Infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Catalog.Data.Repositories;
 
-public class ProductRepository : IProductRepository
+public class ProductsRepository : IProductsRepository
 {
     private readonly ApplicationDbContext _context;
-    private readonly ILogger<ProductRepository> _logger;
 
-    public ProductRepository(IDbContextWrapper<ApplicationDbContext> dbContextWrapper, ILogger<ProductRepository> logger)
+    public ProductsRepository(IDbContextWrapper<ApplicationDbContext> dbContextWrapper)
     {
         _context = dbContextWrapper.DbContext;
-        _logger = logger;
     }
 
     public async Task<int?> AddProductAsync(string name, string desc, decimal price, int availableStock, string pictureName, string type, string brand)
@@ -35,7 +34,6 @@ public class ProductRepository : IProductRepository
         await _context.SaveChangesAsync();
 
         var id = result.Entity.Id;
-        _logger.LogInformation($"Product with id ({id}) has added");
 
         return id;
     }
@@ -52,12 +50,10 @@ public class ProductRepository : IProductRepository
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();
 
-        _logger.LogInformation($"Product with id ({id}) has deleted");
-
         return true;
     }
 
-    public async Task<IEnumerable<ProductEntity>> GetProductsByPageAsync(int pageIndex, int pageSize, string? brandFilter, string? typeFilter)
+    public async Task<PaginatedItems<ProductEntity>> GetProductsByPageAsync(int pageIndex, int pageSize, string? brandFilter, string? typeFilter)
     {
         IQueryable<ProductEntity> query = _context.Products;
 
@@ -71,23 +67,27 @@ public class ProductRepository : IProductRepository
             query = query.Where(p => p.Type == typeFilter);
         }
 
+        var totalItems = await query.LongCountAsync();
+
         var products = await query.OrderBy(c => c.Name)
             .Skip(pageSize * pageIndex)
             .Take(pageSize)
             .ToListAsync();
 
-        _logger.LogInformation($"Found {products.Count} products");
-
-        return products;
+        return new PaginatedItems<ProductEntity>()
+        {
+            Data = products,
+            TotalCount = totalItems,
+        };
     }
 
     public async Task<ProductEntity> GetProductByIdAsync(int id)
     {
-        var product = await _context.Products.FirstOrDefaultAsync();
+        var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
         if (product is null)
         {
-            _logger.LogWarning($"Product with id ({id}) doesn't exist");
+            throw new BusinessException($"Product with id ({id}) doesn't exist");
         }
 
         return product!;
@@ -111,8 +111,6 @@ public class ProductRepository : IProductRepository
         product.Brand = brand;
 
         await _context.SaveChangesAsync();
-
-        _logger.LogInformation($"Product with id ({id}) has updated");
 
         return true;
     }
