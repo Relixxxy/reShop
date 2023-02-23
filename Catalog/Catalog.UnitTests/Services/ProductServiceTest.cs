@@ -2,6 +2,7 @@
 using Catalog.Data;
 using Catalog.Data.Entities;
 using Catalog.Data.Repositories.Interfaces;
+using Catalog.Host.Models.Dtos;
 using Catalog.Host.Services;
 using Catalog.Host.Services.Interfaces;
 using FluentAssertions;
@@ -10,6 +11,7 @@ using Infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.Logging;
 using Moq;
+using Npgsql.Replication;
 
 namespace Catalog.UnitTests.Services;
 
@@ -25,6 +27,7 @@ public class ProductServiceTest
 
     private readonly ProductEntity _testProduct = new ()
     {
+        Id = 1,
         Name = "Name",
         Description = "Description",
         Price = 1000,
@@ -49,7 +52,51 @@ public class ProductServiceTest
     }
 
     [Fact]
-    public async Task AddAsync_Success()
+    public async Task GetProductAsync_Success()
+    {
+        // arrange
+        var id = _testProduct.Id;
+        var testResult = new ProductDto()
+        {
+            Id = id,
+            Name = "Name",
+            Description = "Description",
+            Price = 1000,
+            AvailableStock = 100,
+            Brand = "brand",
+            Type = "type",
+            PictureUrl = "1.png"
+        };
+
+        _productsRepository.Setup(s => s.GetProductByIdAsync(It.IsAny<int>())).ReturnsAsync(_testProduct);
+        _mapper.Setup(s => s.Map<ProductDto>(It.Is<ProductEntity>(i => i.Equals(_testProduct)))).Returns(testResult);
+
+        // act
+        var result = await _productsService.GetProductAsync(id);
+
+        // assert
+        result.Should().Be(testResult);
+    }
+
+    [Fact]
+    public async Task GetProductAsync_Failed()
+    {
+        // arrange
+        var id = _testProduct.Id;
+        ProductDto testResult = null!;
+
+        _productsRepository.Setup(s => s.GetProductByIdAsync(It.IsAny<int>())).ReturnsAsync(_testProduct);
+        _mapper.Setup(s => s.Map<ProductDto>(It.Is<ProductEntity>(i => i.Equals(_testProduct)))).Returns(testResult);
+
+        // act
+        var result = await _productsService.GetProductAsync(id);
+
+        // assert
+        result.Should().Be(testResult);
+    }
+
+    [Fact]
+    public async Task AddProductAsync_Success()
     {
         // arrange
         var testResult = 1;
@@ -71,7 +118,7 @@ public class ProductServiceTest
     }
 
     [Fact]
-    public async Task AddAsync_Failed()
+    public async Task AddProductAsync_Failed()
     {
         // arrange
         int? testResult = null;
@@ -93,7 +140,7 @@ public class ProductServiceTest
     }
 
     [Fact]
-    public async Task UpdateAsync_Success()
+    public async Task UpdateProductAsync_Success()
     {
         // arrange
         var testResult = true;
@@ -116,7 +163,7 @@ public class ProductServiceTest
     }
 
     [Fact]
-    public async Task UpdateAsync_Failed()
+    public async Task UpdateProductAsync_Failed()
     {
         // arrange
         var testResult = false;
@@ -139,7 +186,7 @@ public class ProductServiceTest
     }
 
     [Fact]
-    public async Task DeleteAsync_Success()
+    public async Task DeletevProductAsync_Success()
     {
         // arrange
         var testResult = true;
@@ -154,7 +201,7 @@ public class ProductServiceTest
     }
 
     [Fact]
-    public async Task DeleteAsync_Failed()
+    public async Task DeleteProductAsync_Failed()
     {
         // arrange
         var testResult = false;
