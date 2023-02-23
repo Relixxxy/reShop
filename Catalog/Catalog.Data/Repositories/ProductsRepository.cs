@@ -7,12 +7,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Catalog.Data.Repositories;
 
-public class ProductRepository : IProductRepository
+public class ProductsRepository : IProductsRepository
 {
     private readonly ApplicationDbContext _context;
-    private readonly ILogger<ProductRepository> _logger;
+    private readonly ILogger<ProductsRepository> _logger;
 
-    public ProductRepository(IDbContextWrapper<ApplicationDbContext> dbContextWrapper, ILogger<ProductRepository> logger)
+    public ProductsRepository(IDbContextWrapper<ApplicationDbContext> dbContextWrapper, ILogger<ProductsRepository> logger)
     {
         _context = dbContextWrapper.DbContext;
         _logger = logger;
@@ -58,7 +58,7 @@ public class ProductRepository : IProductRepository
         return true;
     }
 
-    public async Task<IEnumerable<ProductEntity>> GetProductsByPageAsync(int pageIndex, int pageSize, string? brandFilter, string? typeFilter)
+    public async Task<PaginatedItems<ProductEntity>> GetProductsByPageAsync(int pageIndex, int pageSize, string? brandFilter, string? typeFilter)
     {
         IQueryable<ProductEntity> query = _context.Products;
 
@@ -72,6 +72,8 @@ public class ProductRepository : IProductRepository
             query = query.Where(p => p.Type == typeFilter);
         }
 
+        var totalItems = await query.LongCountAsync();
+
         var products = await query.OrderBy(c => c.Name)
             .Skip(pageSize * pageIndex)
             .Take(pageSize)
@@ -79,7 +81,11 @@ public class ProductRepository : IProductRepository
 
         _logger.LogInformation($"Found {products.Count} products");
 
-        return products;
+        return new PaginatedItems<ProductEntity>()
+        {
+            Data = products,
+            TotalCount = totalItems,
+        };
     }
 
     public async Task<ProductEntity> GetProductByIdAsync(int id)
