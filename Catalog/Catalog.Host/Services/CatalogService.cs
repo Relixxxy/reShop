@@ -12,19 +12,19 @@ namespace Catalog.Host.Services;
 
 public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogService
 {
-    private readonly IProductRepository _productRepository;
+    private readonly IProductsRepository _productsRepository;
     private readonly ILogger<CatalogService> _logger;
     private readonly IMapper _mapper;
 
     public CatalogService(
-        IProductRepository productRepository,
+        IProductsRepository productRepository,
         IMapper mapper,
         IDbContextWrapper<ApplicationDbContext> dbContextWrapper,
         ILogger<CatalogService> catalogLog,
         ILogger<BaseDataService<ApplicationDbContext>> baseServiceLog)
         : base(dbContextWrapper, baseServiceLog)
     {
-        _productRepository = productRepository;
+        _productsRepository = productRepository;
         _logger = catalogLog;
         _mapper = mapper;
     }
@@ -36,7 +36,7 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
             string? brandFilter = null;
             string? typeFilter = null;
 
-            if (filters != null)
+            if (filters is not null)
             {
                 if (filters.TryGetValue(ProductTypeFilter.Brand, out var brand))
                 {
@@ -49,17 +49,17 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
                 }
             }
 
-            var result = await _productRepository.GetProductsByPageAsync(pageIndex, pageSize, brandFilter, typeFilter);
+            var result = await _productsRepository.GetProductsByPageAsync(pageIndex, pageSize, brandFilter, typeFilter);
 
-            if (result == null)
+            if (result is null)
             {
                 return null!;
             }
 
             return new PaginatedItemsResponse<ProductDto>()
             {
-                Count = result.Count(),
-                Data = result.Select(_mapper.Map<ProductDto>).ToList(),
+                Count = result.TotalCount,
+                Data = result.Data.Select(_mapper.Map<ProductDto>).ToList(),
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };

@@ -58,7 +58,7 @@ builder.Services.AddAuthorization(configuration);
 
 builder.Services.AddAutoMapper(typeof(Program));
 
-builder.Services.AddTransient<IProductRepository, ProductRepository>();
+builder.Services.AddTransient<IProductsRepository, ProductsRepository>();
 builder.Services.AddTransient<ICatalogService, CatalogService>();
 builder.Services.AddTransient<IProductsService, ProductsService>();
 
