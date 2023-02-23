@@ -29,12 +29,22 @@ public class ProductsService : BaseDataService<ApplicationDbContext>, IProductsS
 
     public Task<int?> AddProductAsync(string name, string desc, decimal price, int availableStock, string pictureName, string type, string brand)
     {
-        return ExecuteSafeAsync(() => _productsRepository.AddProductAsync(name, desc, availableStock, availableStock, pictureName, type, brand));
+        return ExecuteSafeAsync(async () =>
+        {
+            var result = await _productsRepository.AddProductAsync(name, desc, availableStock, availableStock, pictureName, type, brand);
+            _logger.LogInformation($"Product with id ({result}) has added");
+            return result;
+        });
     }
 
     public Task<bool> DeleteProductAsync(int id)
     {
-        return ExecuteSafeAsync(() => _productsRepository.DeleteProductAsync(id));
+        return ExecuteSafeAsync(async () =>
+        {
+            var result = await _productsRepository.DeleteProductAsync(id);
+            _logger.LogInformation($"Product with id ({result}) has deleted");
+            return result;
+        });
     }
 
     public async Task<ProductDto> GetProductAsync(int id)
@@ -44,7 +54,7 @@ public class ProductsService : BaseDataService<ApplicationDbContext>, IProductsS
             var entity = await _productsRepository.GetProductByIdAsync(id);
             var product = _mapper.Map<ProductDto>(entity);
 
-            _logger.LogInformation("ProductEntity successfully got from repo and mapped to dto");
+            _logger.LogInformation($"ProductEntity with id ({entity.Id}) successfully got from repo and mapped to dto");
 
             return product;
         });
@@ -52,6 +62,11 @@ public class ProductsService : BaseDataService<ApplicationDbContext>, IProductsS
 
     public Task<bool> UpdateProductAsync(int id, string name, string desc, decimal price, int availableStock, string pictureName, string type, string brand)
     {
-        return ExecuteSafeAsync(() => _productsRepository.UpdateProductAsync(id, name, desc, availableStock, availableStock, pictureName, type, brand));
+        return ExecuteSafeAsync(async () =>
+        {
+            var result = await _productsRepository.UpdateProductAsync(id, name, desc, availableStock, availableStock, pictureName, type, brand);
+            _logger.LogInformation($"Product with id ({result}) has updated");
+            return result;
+        });
     }
 }

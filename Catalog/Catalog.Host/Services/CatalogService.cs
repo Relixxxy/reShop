@@ -53,8 +53,11 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
 
             if (result is null)
             {
+                _logger.LogWarning($"Products not found");
                 return null!;
             }
+
+            _logger.LogInformation($"Found {result.TotalCount} products");
 
             return new PaginatedItemsResponse<ProductDto>()
             {

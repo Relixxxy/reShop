@@ -10,12 +10,10 @@ namespace Catalog.Data.Repositories;
 public class ProductsRepository : IProductsRepository
 {
     private readonly ApplicationDbContext _context;
-    private readonly ILogger<ProductsRepository> _logger;
 
-    public ProductsRepository(IDbContextWrapper<ApplicationDbContext> dbContextWrapper, ILogger<ProductsRepository> logger)
+    public ProductsRepository(IDbContextWrapper<ApplicationDbContext> dbContextWrapper)
     {
         _context = dbContextWrapper.DbContext;
-        _logger = logger;
     }
 
     public async Task<int?> AddProductAsync(string name, string desc, decimal price, int availableStock, string pictureName, string type, string brand)
@@ -36,7 +34,6 @@ public class ProductsRepository : IProductsRepository
         await _context.SaveChangesAsync();
 
         var id = result.Entity.Id;
-        _logger.LogInformation($"Product with id ({id}) has added");
 
         return id;
     }
@@ -52,8 +49,6 @@ public class ProductsRepository : IProductsRepository
 
         _context.Products.Remove(product);
         await _context.SaveChangesAsync();
-
-        _logger.LogInformation($"Product with id ({id}) has deleted");
 
         return true;
     }
@@ -79,8 +74,6 @@ public class ProductsRepository : IProductsRepository
             .Take(pageSize)
             .ToListAsync();
 
-        _logger.LogInformation($"Found {products.Count} products");
-
         return new PaginatedItems<ProductEntity>()
         {
             Data = products,
@@ -94,9 +87,7 @@ public class ProductsRepository : IProductsRepository
 
         if (product is null)
         {
-            string message = $"Product with id ({id}) doesn't exist";
-            _logger.LogWarning(message);
-            throw new BusinessException(message);
+            throw new BusinessException($"Product with id ({id}) doesn't exist");
         }
 
         return product!;
@@ -120,8 +111,6 @@ public class ProductsRepository : IProductsRepository
         product.Brand = brand;
 
         await _context.SaveChangesAsync();
-
-        _logger.LogInformation($"Product with id ({id}) has updated");
 
         return true;
     }
