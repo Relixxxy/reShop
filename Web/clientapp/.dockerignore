@@ -3,3 +3,5 @@ Dockerfile
 .git
 .gitignore
 .dockerignore
+npm-debug.log
+.DS_Store
