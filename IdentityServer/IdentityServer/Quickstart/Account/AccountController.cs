@@ -96,7 +96,7 @@ namespace IdentityServer4.Quickstart.UI
                     {
                         // if the client is PKCE then we assume it's native, so this change in how to
                         // return the response is for better UX for the end user.
-                        return View("Redirect", new RedirectViewModel { RedirectUrl = _config.MvcUrl });
+                        return View("Redirect", new RedirectViewModel { RedirectUrl = _config.ClientUrl });
                     }
 
                     return Redirect(model.ReturnUrl);
@@ -328,7 +328,7 @@ namespace IdentityServer4.Quickstart.UI
             var vm = new LoggedOutViewModel
             {
                 AutomaticRedirectAfterSignOut = true,
-                PostLogoutRedirectUri = _config.MvcUrl,
+                PostLogoutRedirectUri = _config.ClientUrl,
                 ClientName = string.IsNullOrEmpty(logout?.ClientName) ? logout?.ClientId : logout?.ClientName,
                 SignOutIframeUrl = logout?.SignOutIFrameUrl,
                 LogoutId = logoutId

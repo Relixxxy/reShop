@@ -16,6 +16,25 @@ services:
       - postgres
     ports:
       - 5000:5000
+
+  web.clientapp:
+    container_name: lde.web.clientapp
+    build:
+      context: .
+      dockerfile: Web/clientapp/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:3000
+      - REACT_APP_CATALOG_URL=http://www.alevelwebsite.com:5000/api/v1/catalogbff
+      - REACT_APP_AUTHORITY=http://www.alevelwebsite.com:5002
+      - IdentityUrl=http://www.alevelwebsite.com:5002
+      - CallBackUrl=http://www.alevelwebsite.com/
+      - REACT_APP_REDIRECT_URI=http://www.alevelwebsite.com/signin-oidc
+    depends_on:
+      - catalog.api
+      - identityserver
+    ports:
+      - 3000:3000
   identityserver:
     container_name: lde.identityserver
     build:
@@ -25,6 +44,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5002
       - CatalogApi=http://www.alevelwebsite.com:5000
+      - ClientUrl=http://www.alevelwebsite.com:5001
     ports:
       - 5002:5002
   nginx:
