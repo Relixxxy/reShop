@@ -7,5 +7,4 @@ public interface ICatalogService
     Task<ProductsCatalog> GetCatalogItems(int page, int take, string? brand, string? type);
     Task<IEnumerable<SelectListItem>> GetBrands();
     Task<IEnumerable<SelectListItem>> GetTypes();
-    Task<Product> Test();
 }

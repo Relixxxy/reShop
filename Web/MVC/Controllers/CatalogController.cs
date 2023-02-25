@@ -45,11 +45,4 @@ public class CatalogController : Controller
 
         return View(vm);
     }
-
-    public async Task<IActionResult> Test()
-    {
-        var product = await _catalogService.Test();
-
-        return View(product);
-    }
 }

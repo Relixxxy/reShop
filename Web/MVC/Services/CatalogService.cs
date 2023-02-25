@@ -82,16 +82,4 @@ public class CatalogService : ICatalogService
 
         return list;
     }
-
-    public async Task<Product> Test()
-    {
-        var result = await _httpClient.SendAsync<Product, object>(
-            $"{_settings.Value.CatalogUrl}/product",
-            HttpMethod.Post,
-            new { Id = 1 });
-
-        _logger.LogWarning(result.ToString());
-
-        return result;
-    }
 }

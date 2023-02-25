@@ -5,7 +5,6 @@ using Catalog.Host.Services.Interfaces;
 using Infrastructure;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Catalog.Host.Controllers
