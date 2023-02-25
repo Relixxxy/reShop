@@ -1,0 +1,49 @@
+{
+  "compilers": {
+    "less": {
+      "autoPrefix": string.Empty,
+      "cssComb": "none",
+      "ieCompat": true,
+      "strictMath": false,
+      "strictUnits": false,
+      "relativeUrls": true,
+      "rootPath": string.Empty,
+      "sourceMapRoot": string.Empty,
+      "sourceMapBasePath": string.Empty,
+      "sourceMap": false
+    },
+    "sass": {
+      "includePath": string.Empty,
+      "indentType": "space",
+      "indentWidth": 2,
+      "outputStyle": "expanded",
+      "Precision": 5,
+      "relativeUrls": true,
+      "sourceMapRoot": string.Empty,
+      "sourceMap": false
+    },
+    "stylus": {
+      "sourceMap": false
+    },
+    "babel": {
+      "sourceMap": false
+    },
+    "coffeescript": {
+      "bare": false,
+      "runtimeMode": "node",
+      "sourceMap": false
+    }
+  },
+  "minifiers": {
+    "css": {
+      "enabled": true,
+      "termSemicolons": true,
+      "gzip": false
+    },
+    "javascript": {
+      "enabled": true,
+      "termSemicolons": true,
+      "gzip": false
+    }
+  }
+}

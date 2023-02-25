@@ -68,4 +68,41 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
             };
         });
     }
+
+    public async Task<ProductDto> GetProductAsync(int id)
+    {
+        return await ExecuteSafeAsync(async () =>
+        {
+            var entity = await _productsRepository.GetProductByIdAsync(id);
+            var product = _mapper.Map<ProductDto>(entity);
+
+            _logger.LogInformation($"ProductEntity with id ({entity.Id}) successfully got from repo and mapped to dto");
+
+            return product;
+        });
+    }
+
+    public async Task<IEnumerable<string>> GetBrandsAsync()
+    {
+        return await ExecuteSafeAsync(async () =>
+        {
+            var brands = await _productsRepository.GetBrandsAsync();
+
+            _logger.LogInformation($"Found {brands.Count()} brands");
+
+            return brands;
+        });
+    }
+
+    public async Task<IEnumerable<string>> GetTypesAsync()
+    {
+        return await ExecuteSafeAsync(async () =>
+        {
+            var types = await _productsRepository.GetTypesAsync();
+
+            _logger.LogInformation($"Found {types.Count()} types");
+
+            return types;
+        });
+    }
 }

@@ -1,0 +1,15 @@
+﻿@model Product
+
+
+<form>
+
+    <img class="esh-catalog-thumbnail" src="@Model.PictureUrl" width="330" height="330" />
+
+    <div class="esh-catalog-name">
+        <span>@Model.Name</span>
+    </div>
+    <div class="esh-catalog-price">
+        <span>@Model.Price.ToString("N2")</span>
+    </div>
+    <input type="hidden" asp-for="@Model.Id" name="id" />
+</form>

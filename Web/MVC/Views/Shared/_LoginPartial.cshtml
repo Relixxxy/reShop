@@ -1,0 +1,47 @@
+@using MVC.Services.Interfaces
+
+@inject IIdentityParser<ApplicationUser> UserManager
+
+@if (Context.User.Identity!.IsAuthenticated)
+{
+    <section class="col-lg-4 col-md-5 col-xs-12">
+        <div class="esh-identity">
+            <form asp-area=string.Empty asp-controller="Account" asp-action="SignOut" method="post" id="logoutForm" class="navbar-right">
+                <section class="esh-identity-section">
+
+                    <div class="esh-identity-name">@UserManager.Parse(User).Name</div>
+                    <img class="esh-identity-image" src="~/images/arrow-down.png">
+                </section>
+
+                <section class="esh-identity-drop">
+                    
+                    <a class="esh-identity-item"
+                       href="javascript:document.getElementById('logoutForm').submit()">
+
+                        <div class="esh-identity-name esh-identity-name--upper">Log Out</div>
+                        <img class="esh-identity-image" src="~/images/logout.png">
+                    </a>
+                </section>
+            </form>
+        </div>
+    </section>
+}
+else
+{
+    <section class="col-lg-4 col-md-5 col-xs-12">
+        <div class="esh-identity">
+            <section class="esh-identity-section">
+                <div class="esh-identity-item">
+
+                    <a asp-area=string.Empty asp-controller="Account" asp-action="SignIn" class="esh-identity-name esh-identity-name--upper">
+                        Login
+                    </a>
+                </div>
+            </section>
+        </div>
+    </section>
+
+    <section class="col-lg-1 col-xs-12">
+
+    </section>
+}

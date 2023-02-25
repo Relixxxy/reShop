@@ -28,12 +28,35 @@ namespace Catalog.Host.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ProducesResponseType(typeof(PaginatedItemsResponse<ProductDto>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> Items(PaginatedItemsRequest<ProductTypeFilter> request)
+        public async Task<IActionResult> Products(PaginatedItemsRequest<ProductTypeFilter> request)
         {
             var result = await _catalogService.GetProductsAsync(request.PageIndex, request.PageSize, request.Filters);
+            return Ok(result);
+        }
 
-            _logger.LogInformation($"{result.Count} products has found");
+        [HttpPost]
+        [ProducesResponseType(typeof(ProductDto), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Product(IdRequest request)
+        {
+            var result = await _catalogService.GetProductAsync(request.Id);
+            return Ok(result);
+        }
 
+        [HttpPost]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(IEnumerable<string>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Brands()
+        {
+            var result = await _catalogService.GetBrandsAsync();
+            return Ok(result);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ProducesResponseType(typeof(IEnumerable<string>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> Types()
+        {
+            var result = await _catalogService.GetTypesAsync();
             return Ok(result);
         }
     }

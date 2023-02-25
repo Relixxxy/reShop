@@ -2,6 +2,6 @@
 {
     public class AppSettings
     {
-        public string MvcUrl { get; set; }
+        public string ClientUrl { get; set; }
     }
 }
