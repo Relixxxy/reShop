@@ -1,4 +1,5 @@
-﻿using MVC.Services.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using MVC.Services.Interfaces;
 using MVC.ViewModels.CatalogViewModels;
 using MVC.ViewModels.Pagination;
 
