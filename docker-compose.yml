@@ -43,7 +43,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=http://+:5002
       - CatalogApi=http://www.alevelwebsite.com:5000
-      - ClientUrl=http://www.alevelwebsite.com:5001
+      - MvcUrl=http://www.alevelwebsite.com
     ports:
       - 5002:5002
   nginx:

@@ -27,14 +27,6 @@ namespace IdentityServer
                 .AddInMemoryClients(Config.GetClients(configuration))
                 .AddTestUsers(TestUsers.Users)
                 .AddDeveloperSigningCredential();
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowOrigins",
-                    builder => builder.WithOrigins(configuration["ClientUrl"])
-                    .AllowAnyHeader()
-                    .AllowAnyMethod());
-            });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -45,8 +37,6 @@ namespace IdentityServer
             app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Strict });
             app.UseStaticFiles();
             app.UseRouting();
-
-            app.UseCors("AllowOrigins");
 
             app.UseAuthentication();
             app.UseAuthorization();
