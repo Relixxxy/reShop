@@ -38,7 +38,9 @@ namespace Catalog.Host.Controllers
         [ProducesResponseType(typeof(ProductDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Product(IdRequest request)
         {
+            _logger.LogWarning(request.ToString());
             var result = await _catalogService.GetProductAsync(request.Id);
+            _logger.LogWarning(result.ToString());
             return Ok(result);
         }
 

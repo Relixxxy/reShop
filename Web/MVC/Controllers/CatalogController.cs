@@ -1,4 +1,5 @@
-﻿using MVC.Services.Interfaces;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using MVC.Services.Interfaces;
 using MVC.ViewModels.CatalogViewModels;
 using MVC.ViewModels.Pagination;
 
@@ -43,5 +44,12 @@ public class CatalogController : Controller
         vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-disabled" : string.Empty;
 
         return View(vm);
+    }
+
+    public async Task<IActionResult> Test()
+    {
+        var product = await _catalogService.Test();
+
+        return View(product);
     }
 }
