@@ -1,5 +1,5 @@
 using Basket.Host.Models;
-using Basket.Host.Models.Requests;
+using Infrastructure.Models.Requests;
 using Basket.Host.Services.Interfaces;
 
 namespace Basket.Host.Services;
@@ -7,10 +7,12 @@ namespace Basket.Host.Services;
 public class BasketService : IBasketService
 {
     private readonly ICacheService _cacheService;
+    private readonly ILogger<BasketService> _logger;
 
-    public BasketService(ICacheService cacheService)
+    public BasketService(ICacheService cacheService, ILogger<BasketService> logger)
     {
         _cacheService = cacheService;
+        _logger = logger;
     }
 
     public async Task AddProduct(string userId, Product product)
@@ -22,9 +24,14 @@ public class BasketService : IBasketService
 
         var products = (await GetProducts(userId)).ToList();
 
+        if (products is null)
+        {
+            return;
+        }
+
         var existingProduct = products.FirstOrDefault(p => p.Id == product.Id);
 
-        if (existingProduct != null)
+        if (existingProduct is not null)
         {
             existingProduct.AvailableStock += product.AvailableStock;
         }
@@ -34,6 +41,8 @@ public class BasketService : IBasketService
         }
 
         await _cacheService.AddOrUpdateAsync(userId, products);
+
+        _logger.LogInformation($"Product {product.Name} added");
     }
 
     public async Task<IEnumerable<Product>> GetProducts(string userId)
@@ -42,8 +51,10 @@ public class BasketService : IBasketService
 
         if (products is null)
         {
-            return new List<Product>();
+            products = new List<Product>();
         }
+
+        _logger.LogInformation($"Found {products.Count()} products");
 
         return products;
     }
@@ -62,8 +73,10 @@ public class BasketService : IBasketService
             {
                 products = products.Where(p => p.Id != request.ProductId);
             }
-        }
 
-        await _cacheService.AddOrUpdateAsync(userId, products);
+            await _cacheService.AddOrUpdateAsync(userId, products);
+
+            _logger.LogInformation($"Product {existingProduct?.Name} removed");
+        }
     }
 }

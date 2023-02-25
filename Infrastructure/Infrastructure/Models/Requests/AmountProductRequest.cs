@@ -1,4 +1,4 @@
-﻿namespace Basket.Host.Models.Requests;
+﻿namespace Infrastructure.Models.Requests;
 
 public class AmountProductRequest
 {

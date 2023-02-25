@@ -1,4 +1,4 @@
-﻿namespace Basket.Host.Models.Responses;
+﻿namespace Infrastructure.Models.Responses;
 
 public class ItemsResponse<T>
     where T : class

@@ -1,12 +1,13 @@
 using System.Net;
 using Basket.Host.Models;
-using Basket.Host.Models.Requests;
-using Basket.Host.Models.Responses;
+using Infrastructure.Models.Requests;
 using Basket.Host.Services.Interfaces;
 using Infrastructure;
 using Infrastructure.Identity;
+using Infrastructure.Models.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Basket.Host.Controllers;
 
@@ -28,10 +29,10 @@ public class BasketBffController : ControllerBase
 
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<IActionResult> AddProduct(Product product)
+    public async Task<IActionResult> AddProduct(ItemRequest<Product> request)
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        await _basketService.AddProduct(basketId!, product);
+        await _basketService.AddProduct(basketId!, request.Item);
         return Ok();
     }
 
