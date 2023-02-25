@@ -1,0 +1,187 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Tilt Warp", cursive;
+}
+
+.container {
+  width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* ===========================   Header   =========================== */
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #ecf9ff;
+  color: #4059ac;
+  height: 70px;
+  border-bottom: 1px solid #c496f8;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  margin-right: 100px;
+}
+
+header__username {
+    margin-left: 10px;
+}
+
+.logo {
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: "Tilt Prism", cursive;
+}
+
+.nav {
+  text-align: center;
+}
+
+.nav__list {
+  display: flex;
+  column-gap: 50px;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.list__item {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.list__link {
+  color: #5c79da;
+  font-size: 1.6rem;
+  text-decoration: none;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.list__link::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #5c79da;
+  transform: scaleX(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.list__link:hover::after {
+  transform: scaleX(1);
+}
+
+.button {
+  background-color: #5b73c2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #fff;
+  color: #5b73c2;
+  border: 2px solid #5b73c2;
+  box-shadow: 0 0 5px #5b73c2;
+}
+.header__button {
+  margin-left: auto;
+}
+/* ===========================   Header   =========================== */
+
+/* ===========================   Catalog   =========================== */
+.catalog {
+  background-color: #fff3e7;
+  padding: 40px 0;
+}
+
+.catalog__title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+.catalog__list {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 50px;
+  justify-content: space-between;
+}
+
+.catalog__item {
+  width: 330px;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.catalog__link {
+  display: block;
+  text-decoration: none;
+}
+
+.catalog__image {
+  display: block;
+  margin: 0 auto 10px;
+  max-width: 100%;
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  transition: all 0.3s ease-in-out;
+}
+
+.catalog__image:hover {
+  transform: scale(1.05) translateY(-5%);
+}
+
+.catalog__name {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.catalog__price {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.catalog__filters {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  padding: 10px 20px;
+}
+
+.filters__title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.filters__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===========================   Catalog   =========================== */

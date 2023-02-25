@@ -24,12 +24,12 @@ public class CatalogService : ICatalogService
     {
         var filters = new Dictionary<CatalogTypeFilter, string>();
 
-        if (brand is not null)
+        if (brand is not null && brand != "all")
         {
             filters.Add(CatalogTypeFilter.Brand, brand);
         }
 
-        if (type is not null)
+        if (type is not null && type != "all")
         {
             filters.Add(CatalogTypeFilter.Type, type);
         }

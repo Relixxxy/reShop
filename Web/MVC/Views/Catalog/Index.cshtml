@@ -3,55 +3,42 @@
 @{
     ViewData["Title"] = "Catalog";
 }
-<section class="esh-catalog-hero">
-    <div class="container">
-    </div>
-</section>
 
-<section class="esh-catalog-filters">
+<section class="catalog">
     <div class="container">
-        <form asp-action="Index" asp-controller="Catalog" method="post">
-            <label class="esh-catalog-label" data-title="brand">
-                <select asp-for="@Model.BrandFilterApplied" asp-items="@Model.Brands" class="esh-catalog-filter"></select>
-            </label>
-            <label class="esh-catalog-label" data-title="type">
-                <select asp-for="@Model.TypesFilterApplied" asp-items="@Model.Types" class="esh-catalog-filter"></select>
-            </label>
-            <input class="esh-catalog-send" type="image" src="~/images/arrow-right.svg" />
+        <h2 class="catalog__title">Catalog</h2>
+        <form asp-action="Index" asp-controller="Catalog" method="post" class="catalog__filters filters">
+            <div class="filters__group">
+                <h3 class="filters__title">Filter by Type</h3>
+                <select asp-for="@Model.BrandFilterApplied" asp-items="@Model.Brands">
+                    <option value="all">All Brands</option>
+                </select>
+            </div>
+            <button class="button">Apply filtres</button>
+            <div class="filters__group filters">
+                <h3 class="filters__title">Filter by Brand</h3>
+                <select asp-for="@Model.TypesFilterApplied" asp-items="@Model.Types">
+                    <option value="all">All Types</option>
+                </select>
+            </div>
         </form>
-    </div>
-</section>
-
-<div class="container">
-    <div class="row">
-        <br />
-        @if(ViewBag.BasketInoperativeMsg != null)
+        @if (Model.Products.Count() > 0)
         {
-        <div class="alert alert-warning" role="alert">
-            &nbsp;@ViewBag.BasketInoperativeMsg
-        </div>
+            <ul class="catalog__list list">
+                @foreach (var catalogItem in Model.Products)
+                {
+                    <partial name="_product" model="catalogItem" />
+                }
+            </ul>
+
+            <partial name="_pagination" for="PaginationInfo" />
+        }
+        else
+        {
+            <div>
+                THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
+            </div>
         }
     </div>
+</section>
 
-    @if (Model.Products.Count() > 0)
-    {
-    <partial name="_pagination" for="PaginationInfo" />
-
-    <div class="esh-catalog-items row">
-            @foreach (var catalogItem in Model.Products)
-            {
-        <div class="esh-catalog-item col-md-4">
-            <partial name="_product" model="catalogItem" />
-        </div>
-            }
-    </div>
-
-    <partial name="_pagination" for="PaginationInfo" />
-    }
-    else
-    {
-    <div class="esh-catalog-items row">
-        THERE ARE NO RESULTS THAT MATCH YOUR SEARCH
-    </div>
-    }
-</div>

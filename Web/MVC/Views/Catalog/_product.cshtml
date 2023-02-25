@@ -1,22 +1,26 @@
 ﻿@model Product
 
-<form asp-action="AddProduct" asp-controller="Basket" method="post">
+<li class="catalog__item">
+    <form asp-action="AddProduct" asp-controller="Basket" method="post">
+        <a class="catalog__link">
+            <img width="300"
+                 height="300"
+                 src="@Model.PictureUrl"
+                 alt="@Model.Name"
+                 class="catalog__image" />
+            <h4 class="catalog__name">@Model.Name</h4>
+            <p class="catalog__price">$@Model.Price.ToString("N2")9</p>
 
-    <img class="esh-catalog-thumbnail" src="@Model.PictureUrl" width="330" height="330" />
+            <input type="hidden" asp-for="@Model.Id" name="id" />
+            <input type="hidden" asp-for="@Model.Name" name="name" />
+            <input type="hidden" asp-for="@Model.Description" name="description" />
+            <input type="hidden" asp-for="@Model.Price" name="price" />
+            <input type="hidden" asp-for="@Model.AvailableStock" name="availableStock" />
+            <input type="hidden" asp-for="@Model.PictureUrl" name="pictureUrl" />
+            <input type="hidden" asp-for="@Model.Type" name="type" />
+            <input type="hidden" asp-for="@Model.Brand" name="brand" />
+        </a>
+        <button class="button" type="submit">Add to card</button>
+    </form>
+</li>
 
-    <div class="esh-catalog-name">
-        <span>@Model.Name</span>
-    </div>
-    <div class="esh-catalog-price">
-        <span>@Model.Price.ToString("N2")</span>
-    </div>
-    <input type="hidden" asp-for="@Model.Id" name="id" />
-    <input type="hidden" asp-for="@Model.Name" name="name" />
-    <input type="hidden" asp-for="@Model.Description" name="description" />
-    <input type="hidden" asp-for="@Model.Price" name="price" />
-    <input type="hidden" asp-for="@Model.AvailableStock" name="availableStock" />
-    <input type="hidden" asp-for="@Model.PictureUrl" name="pictureUrl" />
-    <input type="hidden" asp-for="@Model.Type" name="type" />
-    <input type="hidden" asp-for="@Model.Brand" name="brand" />
-    <button type="submit">Add to card</button>
-</form>
