@@ -32,9 +32,9 @@ public class BasketController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> RemoveProduct(int id, int availableStock)
+    public async Task<IActionResult> RemoveProduct(int id, int amount)
     {
-        await _basketService.RemoveProduct(id, availableStock);
+        await _basketService.RemoveProduct(id, amount);
         return RedirectToAction(nameof(Index));
     }
 }

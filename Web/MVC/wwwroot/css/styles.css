@@ -13,6 +13,13 @@
   padding-right: 15px;
 }
 
+.section__title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
 /* ===========================   Header   =========================== */
 .header {
   display: flex;
@@ -33,8 +40,12 @@
   margin-right: 100px;
 }
 
-header__username {
-    margin-left: 10px;
+.header__login {
+    margin-left: auto;
+}
+
+.header__username {
+    margin-right: 20px;
 }
 
 .logo {
@@ -115,13 +126,6 @@ header__username {
   padding: 40px 0;
 }
 
-.catalog__title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 50px;
-}
-
 .catalog__list {
   display: flex;
   flex-wrap: wrap;
@@ -185,3 +189,43 @@ header__username {
 }
 
 /* ===========================   Catalog   =========================== */
+
+/* ===========================   Basket   =========================== */
+
+.basket {
+    background-color: #fff3e7;
+    padding: 40px 0;
+}
+
+.basket__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 100%;
+}
+
+.tablelist__item {
+    height: 200px;
+    display: flex;
+}
+
+.tablelist__image {
+    width: 30%;
+}
+
+.tablelist__info-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.tablelist__info {
+    display: flex;
+    justify-content: space-around;
+}
+
+.tablelist__price {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* ===========================   Basket   =========================== */

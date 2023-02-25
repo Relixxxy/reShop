@@ -17,23 +17,18 @@ public class BasketService : IBasketService
 
     public async Task AddProduct(string userId, Product product)
     {
-        if (product.AvailableStock <= 0)
+        if (product.Amount <= 0)
         {
             return;
         }
 
         var products = (await GetProducts(userId)).ToList();
 
-        if (products is null)
-        {
-            return;
-        }
-
         var existingProduct = products.FirstOrDefault(p => p.Id == product.Id);
 
         if (existingProduct is not null)
         {
-            existingProduct.AvailableStock += product.AvailableStock;
+            existingProduct.Amount += product.Amount;
         }
         else
         {
@@ -67,9 +62,9 @@ public class BasketService : IBasketService
 
         if (existingProduct is not null)
         {
-            existingProduct.AvailableStock -= request.Amount;
+            existingProduct.Amount -= request.Amount;
 
-            if (existingProduct.AvailableStock <= 0)
+            if (existingProduct.Amount <= 0)
             {
                 products = products.Where(p => p.Id != request.ProductId);
             }

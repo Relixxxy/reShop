@@ -4,9 +4,9 @@
 
 @if (Context.User.Identity!.IsAuthenticated)
 {
-    <form asp-area=string.Empty asp-controller="Account" asp-action="SignOut" method="post" id="logoutForm" class="navbar-right">
-            <a class="header__button button">Logout</a>
+    <form asp-area=string.Empty asp-controller="Account" asp-action="SignOut" method="post" id="logoutForm" class="header__login">
             <span class="header__username">@UserManager.Parse(User).Name</span>
+            <button type="submit" class="header__button button">Logout</button>
     </form>
 }
 else

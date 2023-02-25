@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Options;
-using MVC.Dtos;
+﻿using MVC.Dtos;
 using MVC.Models.Enums;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
@@ -24,12 +22,12 @@ public class CatalogService : ICatalogService
     {
         var filters = new Dictionary<CatalogTypeFilter, string>();
 
-        if (brand is not null && brand != "all")
+        if (brand != null && brand != "all")
         {
             filters.Add(CatalogTypeFilter.Brand, brand);
         }
 
-        if (type is not null && type != "all")
+        if (type != null && type != "all")
         {
             filters.Add(CatalogTypeFilter.Type, type);
         }
@@ -44,7 +42,7 @@ public class CatalogService : ICatalogService
                Filters = filters
            });
 
-        _logger.LogInformation(result.ToString());
+        _logger.LogInformation($"Received {result.Count} products from catalog");
 
         return result!;
     }
@@ -57,6 +55,8 @@ public class CatalogService : ICatalogService
             $"{_settings.Value.CatalogUrl}/brands",
             HttpMethod.Post,
             new { });
+
+        _logger.LogInformation($"Received {result.Count()} brands from catalog");
 
         foreach (var brand in result)
         {
@@ -74,6 +74,8 @@ public class CatalogService : ICatalogService
             $"{_settings.Value.CatalogUrl}/types",
             HttpMethod.Post,
             new { });
+
+        _logger.LogInformation($"Received {result.Count()} types from catalog");
 
         foreach (var type in result)
         {
