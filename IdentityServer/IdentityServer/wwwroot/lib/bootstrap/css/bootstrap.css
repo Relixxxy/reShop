@@ -210,7 +210,7 @@ th {
   }
   a[href^="#"]:after,
   a[href^="javascript:"]:after {
-    content: "";
+    content: string.Empty;
   }
   pre,
   blockquote {
@@ -3674,7 +3674,7 @@ tbody.collapse.in {
 }
 .dropup .caret,
 .navbar-fixed-bottom .dropdown .caret {
-  content: "";
+  content: string.Empty;
   border-top: 0;
   border-bottom: 4px dashed;
   border-bottom: 4px solid \9;
@@ -6218,7 +6218,7 @@ button.close {
   border-width: 11px;
 }
 .popover > .arrow:after {
-  content: "";
+  content: string.Empty;
   border-width: 10px;
 }
 .popover.top > .arrow {

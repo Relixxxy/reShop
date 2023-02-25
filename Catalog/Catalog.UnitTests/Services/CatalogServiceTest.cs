@@ -24,6 +24,17 @@ public class CatalogServiceTest
     private readonly Mock<ILogger<CatalogService>> _logger;
     private readonly Mock<ILogger<BaseDataService<ApplicationDbContext>>> _baseServiceLogger;
 
+    private readonly ProductEntity _testProduct = new ()
+    {
+        Id = 1,
+        Name = "Name",
+        Description = "Description",
+        Price = 1000,
+        AvailableStock = 100,
+        Brand = "brand",
+        Type = "type",
+        PictureFileName = "1.png"
+    };
     public CatalogServiceTest()
     {
         _productsRepository = new Mock<IProductsRepository>();
@@ -106,5 +117,49 @@ public class CatalogServiceTest
 
         // assert
         result.Should().BeNull();
+    }
+
+    [Fact]
+    public async Task GetProductAsync_Success()
+    {
+        // arrange
+        var id = _testProduct.Id;
+        var testResult = new ProductDto()
+        {
+            Id = id,
+            Name = "Name",
+            Description = "Description",
+            Price = 1000,
+            AvailableStock = 100,
+            Brand = "brand",
+            Type = "type",
+            PictureUrl = "1.png"
+        };
+
+        _productsRepository.Setup(s => s.GetProductByIdAsync(It.IsAny<int>())).ReturnsAsync(_testProduct);
+        _mapper.Setup(s => s.Map<ProductDto>(It.Is<ProductEntity>(i => i.Equals(_testProduct)))).Returns(testResult);
+
+        // act
+        var result = await _catalogService.GetProductAsync(id);
+
+        // assert
+        result.Should().Be(testResult);
+    }
+
+    [Fact]
+    public async Task GetProductAsync_Failed()
+    {
+        // arrange
+        var id = _testProduct.Id;
+        ProductDto testResult = null!;
+
+        _productsRepository.Setup(s => s.GetProductByIdAsync(It.IsAny<int>())).ReturnsAsync(_testProduct);
+        _mapper.Setup(s => s.Map<ProductDto>(It.Is<ProductEntity>(i => i.Equals(_testProduct)))).Returns(testResult);
+
+        // act
+        var result = await _catalogService.GetProductAsync(id);
+
+        // assert
+        result.Should().Be(testResult);
     }
 }

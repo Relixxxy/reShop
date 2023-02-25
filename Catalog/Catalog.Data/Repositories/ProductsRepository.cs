@@ -114,4 +114,16 @@ public class ProductsRepository : IProductsRepository
 
         return true;
     }
+
+    public async Task<IEnumerable<string>> GetTypesAsync()
+    {
+        var types = await _context.Products.Select(p => p.Type).Distinct().ToListAsync();
+        return types;
+    }
+
+    public async Task<IEnumerable<string>> GetBrandsAsync()
+    {
+        var brands = await _context.Products.Select(p => p.Brand).Distinct().ToListAsync();
+        return brands;
+    }
 }
