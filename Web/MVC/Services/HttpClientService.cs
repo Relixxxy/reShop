@@ -1,5 +1,4 @@
 using IdentityModel.Client;
-using Microsoft.Extensions.Logging;
 using MVC.Services.Interfaces;
 using Newtonsoft.Json;
 
