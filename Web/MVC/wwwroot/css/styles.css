@@ -9,6 +9,13 @@
     font-family: "Tilt Warp", cursive;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff3e7;
+}
+
 a:hover {
    text-decoration: none;
 }
@@ -35,38 +42,11 @@ a:hover {
     column-gap: 50px;
 }
 
-.backdrop {
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.2);
-    transition: transform var(--primary-transform);
-}
-
 .is-hidden {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
     transform: scale(0);
-}
-
-
-.modal-window {
-    position: relative;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 100%;
-    height: 100%;
-    max-width: 450px;
-    max-height: 609px;
-    padding: 40px;
-    background-color: var(--dark-theme-color);
-    overflow-y: auto;
-    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
-    border-radius: 4px;
 }
 
 /* ===========================   Header   =========================== */
@@ -75,8 +55,6 @@ a:hover {
     align-items: center;
     background-color: #ecf9ff;
     color: #4059ac;
-    height: 70px;
-    border-bottom: 1px solid #c496f8;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -98,6 +76,7 @@ a:hover {
 }
 
 .logo {
+    cursor: default;
     font-size: 3rem;
     font-weight: bold;
     font-family: "Tilt Prism", cursive;
@@ -109,7 +88,7 @@ a:hover {
 
 .nav__list {
     display: flex;
-    column-gap: 50px;
+    column-gap: 40px;
 }
 
 .list {
@@ -172,7 +151,6 @@ a:hover {
 
 /* ===========================   Catalog   =========================== */
 .catalog {
-    background-color: #fff3e7;
     padding: 40px 0;
 }
 
@@ -316,6 +294,18 @@ a:hover {
     width: 25%;
 }
 
+.order-form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.order-form__totalprice {
+    font-size: 1rem;
+}
+
 /* ===========================   Basket   =========================== */
 
 
@@ -351,6 +341,7 @@ a:hover {
     background-color: #BAD7E9;
     color: #2B3467;
     height: 100px;
+    margin-top: auto;
 }
 
 .footer__container {

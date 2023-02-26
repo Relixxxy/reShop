@@ -41,6 +41,9 @@
                     <li class="list__item">
                         <a asp-action="Index" asp-controller="Basket" class="list__link">Basket</a>
                     </li>
+                    <li class="list__item">
+                        <a asp-action="Order" asp-controller="Orders" class="list__link">Orders</a>
+                    </li>
                 </ul>
             </nav>
             @await Html.PartialAsync("_LoginPartial")
@@ -50,7 +53,7 @@
 
     @RenderBody()
 
-    <footer class="footer"> 
+    <footer class="footer">
         <div class="footer__container container">
             <span> Final project - 2023 </span>
             <span class="footer__creator"> Vladyslav Pavlenko</span>
