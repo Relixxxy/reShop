@@ -343,3 +343,25 @@ a:hover {
 }
 
 /* ===========================   Product   =========================== */
+
+/* ===========================   Footer   =========================== */
+.footer {
+    display: flex;
+    align-items: center;
+    background-color: #BAD7E9;
+    color: #2B3467;
+    height: 100px;
+}
+
+.footer__container {
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    width: 100%;
+}
+
+.footer__creator {
+    font-size: 1.5rem;
+}
+
+/* ===========================   Footer   =========================== */
