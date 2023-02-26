@@ -1,5 +1,4 @@
-﻿using MVC.Services;
-using MVC.Services.Interfaces;
+﻿using MVC.Services.Interfaces;
 using MVC.ViewModels;
 
 namespace MVC.Controllers;
@@ -15,8 +14,7 @@ public class BasketController : Controller
 
     public async Task<IActionResult> Index()
     {
-        // var products = await _basketService.GetProducts();
-        var products = await MockProductService.GetProducts();
+        var products = await _basketService.GetProducts();
 
         if (products is null)
         {
