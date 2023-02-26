@@ -1,8 +1,8 @@
 ﻿@model Product
 
 <li class="catalog__item">
-    <form asp-action="AddProduct" asp-controller="Basket" method="post">
-        <a class="catalog__link">
+    <form class="product-form" asp-action="ProductInfo" asp-controller="Catalog" method="post">
+        <button class="catalog__link" type="submit" data-modal-open>
             <img width="300"
                  height="300"
                  src="@Model.PictureUrl"
@@ -19,8 +19,6 @@
             <input type="hidden" asp-for="@Model.PictureUrl" name="pictureUrl" />
             <input type="hidden" asp-for="@Model.Type" name="type" />
             <input type="hidden" asp-for="@Model.Brand" name="brand" />
-        </a>
-        <button class="button" type="submit">Add to card</button>
+        </button>
     </form>
 </li>
-
