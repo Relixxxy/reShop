@@ -130,7 +130,7 @@ public class CatalogServiceTest
             Name = "Name",
             Description = "Description",
             Price = 1000,
-            AvailableStock = 100,
+            Amount = 100,
             Brand = "brand",
             Type = "type",
             PictureUrl = "1.png"

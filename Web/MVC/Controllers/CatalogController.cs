@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
-using MVC.Services.Interfaces;
+﻿using MVC.Services.Interfaces;
+using MVC.ViewModels;
 using MVC.ViewModels.CatalogViewModels;
 using MVC.ViewModels.Pagination;
 
@@ -40,9 +40,19 @@ public class CatalogController : Controller
             PaginationInfo = info
         };
 
-        vm.PaginationInfo.Next = (vm.PaginationInfo.ActualPage == vm.PaginationInfo.TotalPages - 1) ? "is-disabled" : string.Empty;
-        vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-disabled" : string.Empty;
+        vm.PaginationInfo.Next = (vm.PaginationInfo.ActualPage == vm.PaginationInfo.TotalPages - 1) ? "is-hidden" : string.Empty;
+        vm.PaginationInfo.Previous = (vm.PaginationInfo.ActualPage == 0) ? "is-hidden" : string.Empty;
 
         return View(vm);
+    }
+
+    public IActionResult ProductInfo(Product product)
+    {
+        if (product is null)
+        {
+            return RedirectToAction(nameof(Index));
+        }
+
+        return View(product);
     }
 }

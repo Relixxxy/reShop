@@ -7,56 +7,57 @@
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/app.css" />
-        <link rel="stylesheet" href="~/css/app.component.css" />
-        <link rel="stylesheet" href="~/css/shared/components/header/header.css" />
-        <link rel="stylesheet" href="~/css/shared/components/pager/pager.css" />
-        <link rel="stylesheet" href="~/css/catalog/catalog.component.css" />
-        <link rel="stylesheet" href="~/css/override.css" type="text/css" />
         <link rel="stylesheet" href="~/css/site.min.css" type="text/css" />
-
+        <link rel="stylesheet" href="~/css/styles.css" type="text/css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&family=Tilt+Warp&display=swap"
+              rel="stylesheet" />
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        <link rel="stylesheet" href="~/css/override.css" type="text/css" />
+        <link rel="stylesheet" href="~/css/styles.css" type="text/css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Tilt+Prism&family=Tilt+Warp&display=swap"
+              rel="stylesheet" />
     </environment>
 </head>
 <body>
-    <header class="esh-app-header">
-        <div class="container">
-            <article class="row">
-
-                <section class="col-lg-7 col-md-6 col-12">
-                    <a class="navbar-brand" routerLink="catalog">
-                        <a asp-area=string.Empty asp-controller="Catalog" asp-action="Index">
-                            <img src="~/images/brand.png" />
-                        </a>
-                    </a>
-                </section>
-                
-                @await Html.PartialAsync("_LoginPartial")
-            </article>
+    <header class="header">
+        <div class="header__container container">
+            <span class="header__logo logo"> reShop </span>
+            <nav class="header__nav nav">
+                <ul class="nav__list list">
+                    <li class="list__item">
+                        <a asp-action="Index" asp-controller="Home" class="list__link">Home</a>
+                    </li>
+                    <li class="list__item">
+                        <a asp-action="Index" asp-controller="Catalog" class="list__link">Catalog</a>
+                    </li>
+                    <li class="list__item">
+                        <a asp-action="Index" asp-controller="Basket" class="list__link">Basket</a>
+                    </li>
+                    <li class="list__item">
+                        <a asp-action="Order" asp-controller="Orders" class="list__link">Orders</a>
+                    </li>
+                </ul>
+            </nav>
+            @await Html.PartialAsync("_LoginPartial")
         </div>
     </header>
 
+
     @RenderBody()
 
-
-    <footer class="esh-app-footer">
-        <div class="container">
-            <article class="row">
-
-                <section class="col-sm-6">
-                    <img class="esh-app-footer-brand" src="~/images/brand_dark.png" />
-                </section>
-
-                <section class="col-sm-6">
-                </section>
-
-            </article>
+    <footer class="footer">
+        <div class="footer__container container">
+            <span> Final project - 2023 </span>
+            <span class="footer__creator"> Vladyslav Pavlenko</span>
+            <span class="logo"> reShop </span>
         </div>
     </footer>
 

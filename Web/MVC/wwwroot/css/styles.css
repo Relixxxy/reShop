@@ -1,0 +1,358 @@
+:root {
+    --primary-transform: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Tilt Warp", cursive;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #fff3e7;
+}
+
+a:hover {
+   text-decoration: none;
+}
+
+.container {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.section__title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 50px;
+}
+
+.pagination-wrapper {
+    display:flex;
+    justify-content:center;
+    margin-top: 40px;
+    column-gap: 50px;
+}
+
+.is-hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: scale(0);
+}
+
+/* ===========================   Header   =========================== */
+.header {
+    display: flex;
+    align-items: center;
+    background-color: #ecf9ff;
+    color: #4059ac;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header__container {
+    display: flex;
+    align-items: center;
+}
+
+.header__logo {
+    margin-right: 100px;
+}
+
+.header__login {
+    margin-left: auto;
+}
+
+.header__username {
+    margin-right: 20px;
+}
+
+.logo {
+    cursor: default;
+    font-size: 3rem;
+    font-weight: bold;
+    font-family: "Tilt Prism", cursive;
+}
+
+.nav {
+    text-align: center;
+}
+
+.nav__list {
+    display: flex;
+    column-gap: 40px;
+}
+
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list__item {
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.list__link {
+    color: #5c79da;
+    font-size: 1.6rem;
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+}
+
+    .list__link::after {
+        content: "";
+        position: absolute;
+        bottom: -12px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #5c79da;
+        transform: scaleX(0);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .list__link:hover::after {
+        transform: scaleX(1);
+    }
+
+.button {
+    background-color: #5b73c2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    padding: 7px 15px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+    .button:hover {
+        background-color: #fff;
+        color: #5b73c2;
+        border: 2px solid #5b73c2;
+        box-shadow: 0 0 5px #5b73c2;
+    }
+
+.header__button {
+    margin-left: auto;
+}
+/* ===========================   Header   =========================== */
+
+/* ===========================   Catalog   =========================== */
+.catalog {
+    padding: 40px 0;
+}
+
+.catalog__list {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 50px;
+    justify-content: space-between;
+}
+
+.catalog__item {
+    width: 330px;
+    padding: 0 15px;
+    text-align: center;
+}
+
+.catalog__link {
+    display: inline;
+    border: none;
+    background-color: transparent;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .catalog__link:focus {
+        outline: none;
+    }
+
+.catalog__image {
+    display: block;
+    margin: 0 auto 10px;
+    max-width: 100%;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .catalog__image:hover {
+        transform: scale(1.05) translateY(-5%);
+    }
+
+.catalog__name {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.catalog__price {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.catalog__filters {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding: 10px 20px;
+}
+
+.catalog__button {
+    margin-top: auto;
+}
+
+.filters__title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.filters__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.filters__button {
+    font-size: 1rem;
+    height: 45px;
+}
+/* ===========================   Catalog   =========================== */
+/* ===========================   Basket   =========================== */
+.basket {
+    background-color: #fff3e7;
+    padding: 40px 0;
+}
+
+.basket__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 100%;
+}
+
+.tablelist__item {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.tablelist__image-wrapper {
+    width: 30%;
+}
+
+.tablelist__info-wrapper {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.tablelist__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50%;
+}
+
+.tablelist__price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50%;
+}
+
+.tablelist_button {
+    width: 100px;
+    height: 40px;
+    font-size: 1rem;
+}
+
+.tablelist__name, .tablelist-totalprice {
+    width: 40%;
+}
+
+.tablelist__type, .tablelist__brand, .tablelist-amount, .tablelist__button-wrapper {
+    width: 25%;
+}
+
+.order-form {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+.order-form__totalprice {
+    font-size: 1rem;
+}
+
+/* ===========================   Basket   =========================== */
+
+
+/* ===========================   Product   =========================== */
+.product-section {
+    padding: 50px 0;
+    background-color: #fff3e7;
+}
+
+.product-form {
+    display: flex;
+    column-gap: 30px;
+}
+.product__name {
+    margin-bottom: 20px;
+}
+
+.product__button {
+    margin-top: 30px;
+}
+
+.product__amount {
+    margin-left: 10px;
+    padding-left: 5px;
+}
+
+/* ===========================   Product   =========================== */
+
+/* ===========================   Footer   =========================== */
+.footer {
+    display: flex;
+    align-items: center;
+    background-color: #BAD7E9;
+    color: #2B3467;
+    height: 100px;
+    margin-top: auto;
+}
+
+.footer__container {
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    width: 100%;
+}
+
+.footer__creator {
+    font-size: 1.5rem;
+}
+
+/* ===========================   Footer   =========================== */

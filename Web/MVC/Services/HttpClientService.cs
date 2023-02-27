@@ -8,13 +8,16 @@ public class HttpClientService : IHttpClientService
 {
     private readonly IHttpClientFactory _clientFactory;
     private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly ILogger<HttpClientService> _logger;
 
     public HttpClientService(
         IHttpClientFactory clientFactory,
-        IHttpContextAccessor httpContextAccessor)
+        IHttpContextAccessor httpContextAccessor,
+        ILogger<HttpClientService> logger)
     {
         _clientFactory = clientFactory;
         _httpContextAccessor = httpContextAccessor;
+        _logger = logger;
     }
 
     public async Task<TResponse> SendAsync<TResponse, TRequest>(string url, HttpMethod method, TRequest? content)
@@ -39,6 +42,8 @@ public class HttpClientService : IHttpClientService
         }
 
         var result = await client.SendAsync(httpMessage);
+
+        _logger.LogInformation(await result.Content.ReadAsStringAsync());
 
         if (result.IsSuccessStatusCode)
         {

@@ -51,6 +51,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IHttpClientService, HttpClientService>();
 builder.Services.AddTransient<ICatalogService, CatalogService>();
+builder.Services.AddTransient<IBasketService, BasketService>();
 builder.Services.AddTransient<IIdentityParser<ApplicationUser>, IdentityParser>();
 
 var app = builder.Build();
