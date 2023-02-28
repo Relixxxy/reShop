@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace MVC.Controllers
+namespace MVC.Controllers;
+
+[Authorize]
+public class OrdersController : Controller
 {
-    public class OrdersController : Controller
+    public IActionResult Order()
     {
-        public IActionResult Order()
-        {
-            return View();
-        }
+        return View();
     }
 }

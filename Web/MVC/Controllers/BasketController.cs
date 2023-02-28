@@ -3,6 +3,7 @@ using MVC.ViewModels;
 
 namespace MVC.Controllers;
 
+[Authorize]
 public class BasketController : Controller
 {
     private readonly IBasketService _basketService;
