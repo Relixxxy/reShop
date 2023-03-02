@@ -24,11 +24,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Mapper\" />
-	  <Folder Include="Services\Interfaces\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <ProjectReference Include="..\..\Infrastructure\Infrastructure\Infrastructure.csproj" />
 	  <ProjectReference Include="..\Order.Data\Order.Data.csproj" />
 	</ItemGroup>

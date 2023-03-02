@@ -54,19 +54,19 @@ public class BasketService : IBasketService
         return products;
     }
 
-    public async Task RemoveProduct(string userId, AmountProductRequest request)
+    public async Task RemoveProduct(string userId, int productId, int amount)
     {
         var products = await GetProducts(userId);
 
-        var existingProduct = products.FirstOrDefault(p => p.Id == request.ProductId);
+        var existingProduct = products.FirstOrDefault(p => p.Id == productId);
 
         if (existingProduct is not null)
         {
-            existingProduct.Amount -= request.Amount;
+            existingProduct.Amount -= amount;
 
             if (existingProduct.Amount <= 0)
             {
-                products = products.Where(p => p.Id != request.ProductId);
+                products = products.Where(p => p.Id != productId);
             }
 
             await _cacheService.AddOrUpdateAsync(userId, products);

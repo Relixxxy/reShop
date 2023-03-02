@@ -50,7 +50,7 @@ public class BasketBffController : ControllerBase
     public async Task<IActionResult> RemoveProduct(AmountProductRequest request)
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        await _basketService.RemoveProduct(basketId!, request);
+        await _basketService.RemoveProduct(basketId!, request.ProductId, request.Amount);
         return Ok();
     }
 }

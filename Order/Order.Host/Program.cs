@@ -7,6 +7,10 @@ using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Order.Data;
 using Order.Host.Configurations;
+using Order.Host.Services.Interfaces;
+using Order.Host.Services;
+using Order.Data.Repositories;
+using Order.Data.Repositories.Interfaces;
 
 var configuration = GetConfiguration();
 
@@ -53,6 +57,11 @@ builder.Services.Configure<OrderConfig>(configuration);
 builder.Services.AddAuthorization(configuration);
 
 builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddTransient<IOrderService, OrderService>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IInternalHttpClientService, InternalHttpClientService>();
+builder.Services.AddHttpClient();
 
 builder.Services.AddDbContextFactory<ApplicationDbContext>(opts => opts.UseNpgsql(configuration["ConnectionString"]));
 builder.Services.AddScoped<IDbContextWrapper<ApplicationDbContext>, DbContextWrapper<ApplicationDbContext>>();

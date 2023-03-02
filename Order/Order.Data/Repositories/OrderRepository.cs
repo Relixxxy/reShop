@@ -14,10 +14,11 @@ public class OrderRepository : IOrderRepository
         _context = dbContextWrapper.DbContext;
     }
 
-    public async Task<int?> CreateOrder(int orderNumber, decimal totalPrice, DateTime createdAt, IEnumerable<ProductEntity> products)
+    public async Task<int?> CreateOrderAsync(string userId, int orderNumber, decimal totalPrice, DateTime createdAt, IEnumerable<ProductEntity> products)
     {
         var order = new OrderEntity()
         {
+            UserId = userId,
             OrderNumber = orderNumber,
             TotalPrice = totalPrice,
             CreatedAt = createdAt,
@@ -30,9 +31,12 @@ public class OrderRepository : IOrderRepository
         return result.Entity.Id;
     }
 
-    public async Task<IEnumerable<OrderEntity>> GetOrders()
+    public async Task<IEnumerable<OrderEntity>> GetOrdersByUserIdAsync(string userId)
     {
-        var orders = await _context.Orders.Include(o => o.Products).ToListAsync();
+        var orders = await _context.Orders
+            .Where(o => o.UserId == userId)
+            .Include(o => o.Products)
+            .ToListAsync();
 
         return orders;
     }
