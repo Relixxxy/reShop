@@ -12,7 +12,7 @@ public class OrderEntityConfiguration : IEntityTypeConfiguration<OrderEntity>
         builder.Property(p => p.Id).UseHiLo("order_hilo").IsRequired();
 
         builder.Property(p => p.OrderNumber).IsRequired();
-        builder.Property(p => p.CreatedAt).IsRequired();
         builder.Property(p => p.TotalPrice).IsRequired();
+        builder.Property(p => p.CreatedAt).IsRequired();
     }
 }

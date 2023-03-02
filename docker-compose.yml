@@ -59,6 +59,7 @@ services:
       - ASPNETCORE_URLS=http://+:5001
       - BasketUrl=http://www.alevelwebsite.com:5003/api/v1/basketbff
       - CatalogUrl=http://www.alevelwebsite.com:5000/api/v1/catalogbff
+      - OrderUrl=http://www.alevelwebsite.com:5004/api/v1/ordersbff
       - Authorization__Authority=http://www.alevelwebsite.com:5002
       - IdentityUrl=http://www.alevelwebsite.com:5002
       - CallBackUrl=http://www.alevelwebsite.com/

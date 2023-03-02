@@ -62,7 +62,7 @@ public class OrderService : BaseDataService<ApplicationDbContext>, IOrderService
             var totalPrice = response.Items.Sum(p => p.Price * p.Amount);
             var productEntities = response.Items.Select(_mapper.Map<ProductEntity>).ToList();
 
-            return await _orderRepository.CreateOrderAsync(userId, orderNumber, totalPrice, DateTime.Now, productEntities);
+            return await _orderRepository.CreateOrderAsync(userId, orderNumber, totalPrice, DateTime.Now.ToUniversalTime(), productEntities);
         });
     }
 

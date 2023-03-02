@@ -14,7 +14,7 @@
                 <partial name="_tableProduct" model="product" />
             }
         </ul>
-        <form class="order-form" asp-action="Order" asp-controller="Orders">
+        <form class="order-form" asp-action="CreateOrder" asp-controller="Orders">
             <span class="order-form__totalprice">Total Price: @Model.Sum(p => p.Price * p.Amount)</span>
             <button type="submit" class="button">Order</button>
         </form>
