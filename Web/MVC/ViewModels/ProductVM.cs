@@ -1,6 +1,6 @@
 ﻿namespace MVC.ViewModels;
 
-public class Product
+public class ProductVM
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;

@@ -3,15 +3,15 @@ using MVC.ViewModels;
 
 namespace MVC.Services;
 
-public class IdentityParser : IIdentityParser<ApplicationUser>
+public class IdentityParser : IIdentityParser<ApplicationUserVM>
 {
-    public ApplicationUser Parse(IPrincipal principal)
+    public ApplicationUserVM Parse(IPrincipal principal)
     {
         // Pattern matching 'is' expression
         // assigns "claims" if "principal" is a "ClaimsPrincipal"
         if (principal is ClaimsPrincipal claims)
         {
-            return new ApplicationUser
+            return new ApplicationUserVM
             {
                 CardHolderName = claims.Claims.FirstOrDefault(x => x.Type == "card_holder")?.Value ?? string.Empty,
                 CardNumber = claims.Claims.FirstOrDefault(x => x.Type == "card_number")?.Value ?? string.Empty,

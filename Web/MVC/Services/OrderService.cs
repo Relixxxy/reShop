@@ -32,9 +32,9 @@ public class OrderService : IOrderService
         return orderId;
     }
 
-    public async Task<IEnumerable<Order>> GetOrdersAsync()
+    public async Task<IEnumerable<OrderVM>> GetOrdersAsync()
     {
-        var result = await _httpClient.SendAsync<ItemsResponse<Order>, object>(
+        var result = await _httpClient.SendAsync<ItemsResponse<OrderVM>, object>(
             $"{_settings.Value.OrderUrl}/getorders",
             HttpMethod.Post,
             new { });

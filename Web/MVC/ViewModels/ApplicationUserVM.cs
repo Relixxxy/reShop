@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 namespace MVC.ViewModels;
 
 // Add profile data for application users by adding properties to the ApplicationUser class
-public class ApplicationUser : IdentityUser
+public class ApplicationUserVM : IdentityUser
 {
     public string CardNumber { get; set; } = null!;
     public string SecurityNumber { get; set; } = null!;

@@ -53,7 +53,9 @@ builder.Services.AddTransient<IHttpClientService, HttpClientService>();
 builder.Services.AddTransient<ICatalogService, CatalogService>();
 builder.Services.AddTransient<IBasketService, BasketService>();
 builder.Services.AddTransient<IOrderService, OrderService>();
-builder.Services.AddTransient<IIdentityParser<ApplicationUser>, IdentityParser>();
+builder.Services.AddTransient<IIdentityParser<ApplicationUserVM>, IdentityParser>();
+
+builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
 

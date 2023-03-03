@@ -1,4 +1,6 @@
-﻿using Infrastructure.Models.Enums;
+﻿using AutoMapper;
+using Infrastructure.Models.Dtos;
+using Infrastructure.Models.Enums;
 using Infrastructure.Models.Requests;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
@@ -10,15 +12,21 @@ public class CatalogService : ICatalogService
     private readonly IOptions<AppSettings> _settings;
     private readonly IHttpClientService _httpClient;
     private readonly ILogger<CatalogService> _logger;
+    private readonly IMapper _mapper;
 
-    public CatalogService(IHttpClientService httpClient, ILogger<CatalogService> logger, IOptions<AppSettings> settings)
+    public CatalogService(
+        IHttpClientService httpClient,
+        ILogger<CatalogService> logger,
+        IOptions<AppSettings> settings,
+        IMapper mapper)
     {
         _httpClient = httpClient;
         _settings = settings;
         _logger = logger;
+        _mapper = mapper;
     }
 
-    public async Task<ProductsCatalog> GetCatalogItems(int page, int take, string? brand, string? type)
+    public async Task<ProductsCatalogVM> GetCatalogItems(int page, int take, string? brand, string? type)
     {
         var filters = new Dictionary<ProductTypeFilter, string>();
 
@@ -32,7 +40,7 @@ public class CatalogService : ICatalogService
             filters.Add(ProductTypeFilter.Type, type);
         }
 
-        var result = await _httpClient.SendAsync<ProductsCatalog, PaginatedItemsRequest<ProductTypeFilter>>(
+        var result = await _httpClient.SendAsync<ProductsCatalogVM, PaginatedItemsRequest<ProductTypeFilter>>(
            $"{_settings.Value.CatalogUrl}/products",
            HttpMethod.Post,
            new PaginatedItemsRequest<ProductTypeFilter>()
@@ -85,13 +93,15 @@ public class CatalogService : ICatalogService
         return list;
     }
 
-    public async Task<Product> GetProductById(int productId)
+    public async Task<ProductVM> GetProductById(int productId)
     {
-        var result = await _httpClient.SendAsync<Product, IdRequest>(
+        var result = await _httpClient.SendAsync<CatalogProductDto, IdRequest>(
             $"{_settings.Value.CatalogUrl}/types",
             HttpMethod.Post,
             new IdRequest { Id = productId });
 
-        return result;
+        var productVM = _mapper.Map<ProductVM>(result);
+
+        return productVM;
     }
 }

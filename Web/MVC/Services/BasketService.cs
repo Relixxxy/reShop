@@ -18,18 +18,18 @@ public class BasketService : IBasketService
         _logger = logger;
     }
 
-    public async Task AddProduct(Product product)
+    public async Task AddProduct(ProductVM product)
     {
         _logger.LogInformation(product.ToString());
-        var result = await _httpClient.SendAsync<object, ItemRequest<Product>>(
+        var result = await _httpClient.SendAsync<object, ItemRequest<ProductVM>>(
             $"{_settings.Value.BasketUrl}/addproduct",
             HttpMethod.Post,
-            new ItemRequest<Product> { Item = product });
+            new ItemRequest<ProductVM> { Item = product });
     }
 
-    public async Task<IEnumerable<Product>> GetProducts()
+    public async Task<IEnumerable<ProductVM>> GetProducts()
     {
-        var result = await _httpClient.SendAsync<ItemsResponse<Product>, object>(
+        var result = await _httpClient.SendAsync<ItemsResponse<ProductVM>, object>(
             $"{_settings.Value.BasketUrl}/getproducts",
             HttpMethod.Post,
             new { });

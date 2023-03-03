@@ -1,9 +1,9 @@
 ﻿namespace MVC.ViewModels;
 
-public record ProductsCatalog
+public record ProductsCatalogVM
 {
     public int PageIndex { get; init; }
     public int PageSize { get; init; }
     public int Count { get; init; }
-    public List<Product> Data { get; init; } = null!;
+    public List<ProductVM> Data { get; init; } = null!;
 }

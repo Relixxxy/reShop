@@ -4,7 +4,7 @@ namespace MVC.Services.Interfaces;
 
 public interface IBasketService
 {
-    Task AddProduct(Product product);
+    Task AddProduct(ProductVM product);
     Task RemoveProduct(int id, int amount);
-    Task<IEnumerable<Product>> GetProducts();
+    Task<IEnumerable<ProductVM>> GetProducts();
 }

@@ -8,11 +8,11 @@ namespace MVC.Controllers;
 public class AccountController : Controller
 {
     private readonly ILogger<AccountController> _logger;
-    private readonly IIdentityParser<ApplicationUser> _identityParser;
+    private readonly IIdentityParser<ApplicationUserVM> _identityParser;
 
     public AccountController(
         ILogger<AccountController> logger,
-        IIdentityParser<ApplicationUser> identityParser)
+        IIdentityParser<ApplicationUserVM> identityParser)
     {
         _logger = logger;
         _identityParser = identityParser;

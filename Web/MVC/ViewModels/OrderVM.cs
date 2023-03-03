@@ -1,12 +1,12 @@
-﻿using MVC.ViewModels.Dtos;
+﻿using Infrastructure.Models.Dtos;
 
 namespace MVC.ViewModels;
 
-public class Order
+public class OrderVM
 {
     public int Id { get; set; }
     public int OrderNumber { get; set; }
     public decimal TotalPrice { get; set; }
     public DateTime CreatedAt { get; set; }
-    public IEnumerable<ProductDto> Products { get; set; } = null!;
+    public IEnumerable<OrderProductDto> Products { get; set; } = null!;
 }

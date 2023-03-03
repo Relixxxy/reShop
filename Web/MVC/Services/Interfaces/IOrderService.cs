@@ -4,6 +4,6 @@ namespace MVC.Services.Interfaces;
 
 public interface IOrderService
 {
-    Task<IEnumerable<Order>> GetOrdersAsync();
+    Task<IEnumerable<OrderVM>> GetOrdersAsync();
     Task<int?> CreateOrderAsync();
 }
