@@ -11,6 +11,8 @@ public class MappingProfile : Profile
         CreateMap<OrderEntity, OrderDto>();
 
         CreateMap<ProductEntity, OrderProductDto>();
-        CreateMap<OrderProductDto, ProductEntity>();
+        CreateMap<OrderProductDto, ProductEntity>()
+            .ForMember(pe => pe.ProductId, opt => opt.MapFrom(op => op.Id))
+            .ForMember(pe => pe.Id, opt => opt.Ignore());
     }
 }

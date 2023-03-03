@@ -46,6 +46,7 @@ public class CatalogController : Controller
         return View(vm);
     }
 
+    [Authorize]
     public async Task<IActionResult> ProductInfo(int productId)
     {
         var product = await _catalogService.GetProductById(productId);

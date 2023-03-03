@@ -2,6 +2,7 @@
 using Infrastructure.Models.Dtos;
 using Infrastructure.Models.Enums;
 using Infrastructure.Models.Requests;
+using Infrastructure.Models.Responses;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
 
@@ -95,12 +96,12 @@ public class CatalogService : ICatalogService
 
     public async Task<ProductVM> GetProductById(int productId)
     {
-        var result = await _httpClient.SendAsync<CatalogProductDto, IdRequest>(
-            $"{_settings.Value.CatalogUrl}/types",
+        var result = await _httpClient.SendAsync<ItemResponse<CatalogProductDto>, IdRequest>(
+            $"{_settings.Value.CatalogUrl}/product",
             HttpMethod.Post,
             new IdRequest { Id = productId });
 
-        var productVM = _mapper.Map<ProductVM>(result);
+        var productVM = _mapper.Map<ProductVM>(result.Item);
 
         return productVM;
     }
