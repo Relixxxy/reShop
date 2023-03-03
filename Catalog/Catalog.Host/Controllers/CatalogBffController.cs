@@ -1,11 +1,12 @@
 ﻿using System.Net;
-using Catalog.Host.Models.Dtos;
-using Catalog.Host.Models.Enums;
+using Infrastructure.Models.Enums;
 using Catalog.Host.Models.Requests;
 using Catalog.Host.Models.Responses;
 using Catalog.Host.Services.Interfaces;
 using Infrastructure;
 using Infrastructure.Identity;
+using Infrastructure.Models.Dtos;
+using Infrastructure.Models.Requests;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,7 +28,7 @@ namespace Catalog.Host.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ProducesResponseType(typeof(PaginatedItemsResponse<ProductDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(PaginatedItemsResponse<CatalogProductDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Products(PaginatedItemsRequest<ProductTypeFilter> request)
         {
             var result = await _catalogService.GetProductsAsync(request.PageIndex, request.PageSize, request.Filters);
@@ -35,7 +36,7 @@ namespace Catalog.Host.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(ProductDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(CatalogProductDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> Product(IdRequest request)
         {
             var result = await _catalogService.GetProductAsync(request.Id);

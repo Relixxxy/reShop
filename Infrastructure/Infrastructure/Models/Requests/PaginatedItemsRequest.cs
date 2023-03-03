@@ -1,4 +1,4 @@
-namespace MVC.Dtos;
+namespace Infrastructure.Models.Requests;
 
 public class PaginatedItemsRequest<T>
     where T : notnull

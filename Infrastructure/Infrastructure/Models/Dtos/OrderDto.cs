@@ -1,4 +1,4 @@
-﻿namespace Order.Host.Models.Dtos;
+﻿namespace Infrastructure.Models.Dtos;
 
 public class OrderDto
 {
@@ -6,5 +6,5 @@ public class OrderDto
     public int OrderNumber { get; set; }
     public decimal TotalPrice { get; set; }
     public DateTime CreatedAt { get; set; }
-    public IEnumerable<ProductDto> Products { get; set; } = null!;
+    public IEnumerable<OrderProductDto> Products { get; set; } = null!;
 }

@@ -1,4 +1,4 @@
-﻿namespace Catalog.Host.Models.Enums;
+﻿namespace Infrastructure.Models.Enums;
 
 public enum ProductTypeFilter
 {

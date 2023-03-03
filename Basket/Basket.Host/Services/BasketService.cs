@@ -1,6 +1,6 @@
-using Basket.Host.Models;
 using Infrastructure.Models.Requests;
 using Basket.Host.Services.Interfaces;
+using Infrastructure.Models.Dtos;
 
 namespace Basket.Host.Services;
 
@@ -15,7 +15,7 @@ public class BasketService : IBasketService
         _logger = logger;
     }
 
-    public async Task AddProduct(string userId, Product product)
+    public async Task AddProduct(string userId, BasketProductDto product)
     {
         if (product.Amount <= 0)
         {
@@ -40,13 +40,18 @@ public class BasketService : IBasketService
         _logger.LogInformation($"Product {product.Name} added");
     }
 
-    public async Task<IEnumerable<Product>> GetProducts(string userId)
+    public async Task Clear(string userId)
     {
-        var products = await _cacheService.GetAsync<IEnumerable<Product>>(userId);
+        await _cacheService.ClearAsync(userId);
+    }
+
+    public async Task<IEnumerable<BasketProductDto>> GetProducts(string userId)
+    {
+        var products = await _cacheService.GetAsync<IEnumerable<BasketProductDto>>(userId);
 
         if (products is null)
         {
-            products = new List<Product>();
+            products = new List<BasketProductDto>();
         }
 
         _logger.LogInformation($"Found {products.Count()} products");

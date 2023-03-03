@@ -1,11 +1,11 @@
 ﻿using System.Net;
 using Infrastructure;
 using Infrastructure.Identity;
+using Infrastructure.Models.Dtos;
 using Infrastructure.Models.Response;
 using Infrastructure.Models.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Order.Host.Models.Dtos;
 using Order.Host.Services.Interfaces;
 
 namespace Order.Host.Controllers

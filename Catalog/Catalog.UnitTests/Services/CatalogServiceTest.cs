@@ -9,8 +9,8 @@ using Catalog.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore.Storage;
 using Infrastructure.Services;
 using Catalog.Data.Entities;
-using Catalog.Host.Models.Dtos;
 using FluentAssertions;
+using Infrastructure.Models.Dtos;
 
 namespace Catalog.UnitTests.Services;
 
@@ -73,7 +73,7 @@ public class CatalogServiceTest
             Name = "TestName"
         };
 
-        var productDtoSuccess = new ProductDto()
+        var productDtoSuccess = new CatalogProductDto()
         {
             Name = "TestName"
         };
@@ -84,7 +84,7 @@ public class CatalogServiceTest
             It.IsAny<string?>(),
             It.IsAny<string?>())).ReturnsAsync(pagingPaginatedItemsSuccess);
 
-        _mapper.Setup(s => s.Map<ProductDto>(
+        _mapper.Setup(s => s.Map<CatalogProductDto>(
             It.Is<ProductEntity>(i => i.Equals(productSuccess)))).Returns(productDtoSuccess);
 
         // act
@@ -124,7 +124,7 @@ public class CatalogServiceTest
     {
         // arrange
         var id = _testProduct.Id;
-        var testResult = new ProductDto()
+        var testResult = new CatalogProductDto()
         {
             Id = id,
             Name = "Name",
@@ -137,7 +137,7 @@ public class CatalogServiceTest
         };
 
         _productsRepository.Setup(s => s.GetProductByIdAsync(It.IsAny<int>())).ReturnsAsync(_testProduct);
-        _mapper.Setup(s => s.Map<ProductDto>(It.Is<ProductEntity>(i => i.Equals(_testProduct)))).Returns(testResult);
+        _mapper.Setup(s => s.Map<CatalogProductDto>(It.Is<ProductEntity>(i => i.Equals(_testProduct)))).Returns(testResult);
 
         // act
         var result = await _catalogService.GetProductAsync(id);
@@ -151,10 +151,10 @@ public class CatalogServiceTest
     {
         // arrange
         var id = _testProduct.Id;
-        ProductDto testResult = null!;
+        CatalogProductDto testResult = null!;
 
         _productsRepository.Setup(s => s.GetProductByIdAsync(It.IsAny<int>())).ReturnsAsync(_testProduct);
-        _mapper.Setup(s => s.Map<ProductDto>(It.Is<ProductEntity>(i => i.Equals(_testProduct)))).Returns(testResult);
+        _mapper.Setup(s => s.Map<CatalogProductDto>(It.Is<ProductEntity>(i => i.Equals(_testProduct)))).Returns(testResult);
 
         // act
         var result = await _catalogService.GetProductAsync(id);

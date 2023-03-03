@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Catalog.Data;
 using Catalog.Data.Repositories.Interfaces;
-using Catalog.Host.Models.Dtos;
 using Catalog.Host.Services.Interfaces;
+using Infrastructure.Models.Dtos;
 using Infrastructure.Services;
 using Infrastructure.Services.Interfaces;
 
@@ -47,12 +47,12 @@ public class ProductsService : BaseDataService<ApplicationDbContext>, IProductsS
         });
     }
 
-    public async Task<ProductDto> GetProductAsync(int id)
+    public async Task<CatalogProductDto> GetProductAsync(int id)
     {
         return await ExecuteSafeAsync(async () =>
         {
             var entity = await _productsRepository.GetProductByIdAsync(id);
-            var product = _mapper.Map<ProductDto>(entity);
+            var product = _mapper.Map<CatalogProductDto>(entity);
 
             _logger.LogInformation($"ProductEntity with id ({entity.Id}) successfully got from repo and mapped to dto");
 

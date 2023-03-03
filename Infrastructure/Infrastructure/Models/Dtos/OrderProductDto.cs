@@ -1,6 +1,6 @@
-﻿namespace Order.Host.Models.Dtos;
+﻿namespace Infrastructure.Models.Dtos;
 
-public class ProductDto
+public class OrderProductDto
 {
     public int Id { get; set; }
     public int ProductId { get; set; }

@@ -1,5 +1,5 @@
-﻿using MVC.Dtos;
-using MVC.Models.Enums;
+﻿using Infrastructure.Models.Enums;
+using Infrastructure.Models.Requests;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
 
@@ -20,22 +20,22 @@ public class CatalogService : ICatalogService
 
     public async Task<ProductsCatalog> GetCatalogItems(int page, int take, string? brand, string? type)
     {
-        var filters = new Dictionary<CatalogTypeFilter, string>();
+        var filters = new Dictionary<ProductTypeFilter, string>();
 
         if (brand != null && brand != "all")
         {
-            filters.Add(CatalogTypeFilter.Brand, brand);
+            filters.Add(ProductTypeFilter.Brand, brand);
         }
 
         if (type != null && type != "all")
         {
-            filters.Add(CatalogTypeFilter.Type, type);
+            filters.Add(ProductTypeFilter.Type, type);
         }
 
-        var result = await _httpClient.SendAsync<ProductsCatalog, PaginatedItemsRequest<CatalogTypeFilter>>(
+        var result = await _httpClient.SendAsync<ProductsCatalog, PaginatedItemsRequest<ProductTypeFilter>>(
            $"{_settings.Value.CatalogUrl}/products",
            HttpMethod.Post,
-           new PaginatedItemsRequest<CatalogTypeFilter>()
+           new PaginatedItemsRequest<ProductTypeFilter>()
            {
                PageIndex = page,
                PageSize = take,
@@ -83,5 +83,15 @@ public class CatalogService : ICatalogService
         }
 
         return list;
+    }
+
+    public async Task<Product> GetProductById(int productId)
+    {
+        var result = await _httpClient.SendAsync<Product, IdRequest>(
+            $"{_settings.Value.CatalogUrl}/types",
+            HttpMethod.Post,
+            new IdRequest { Id = productId });
+
+        return result;
     }
 }

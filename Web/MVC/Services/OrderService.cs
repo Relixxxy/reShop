@@ -1,5 +1,4 @@
-﻿using Infrastructure.Models.Requests;
-using Infrastructure.Models.Response;
+﻿using Infrastructure.Models.Response;
 using Infrastructure.Models.Responses;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
@@ -26,9 +25,11 @@ public class OrderService : IOrderService
             HttpMethod.Post,
             new { });
 
-        _logger.LogInformation($"Order created with id {result.Id}");
+        var orderId = result?.Id;
 
-        return result.Id;
+        _logger.LogInformation($"Order created with id {orderId}");
+
+        return orderId;
     }
 
     public async Task<IEnumerable<Order>> GetOrdersAsync()

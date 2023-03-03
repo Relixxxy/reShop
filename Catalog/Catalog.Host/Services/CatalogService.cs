@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Catalog.Data;
 using Catalog.Data.Repositories.Interfaces;
-using Catalog.Host.Models.Dtos;
-using Catalog.Host.Models.Enums;
+using Infrastructure.Models.Enums;
 using Catalog.Host.Models.Responses;
 using Catalog.Host.Services.Interfaces;
+using Infrastructure.Models.Dtos;
 using Infrastructure.Services;
 using Infrastructure.Services.Interfaces;
 
@@ -29,7 +29,7 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
         _mapper = mapper;
     }
 
-    public async Task<PaginatedItemsResponse<ProductDto>> GetProductsAsync(int pageIndex, int pageSize, Dictionary<ProductTypeFilter, string>? filters)
+    public async Task<PaginatedItemsResponse<CatalogProductDto>> GetProductsAsync(int pageIndex, int pageSize, Dictionary<ProductTypeFilter, string>? filters)
     {
         return await ExecuteSafeAsync(async () =>
         {
@@ -59,22 +59,22 @@ public class CatalogService : BaseDataService<ApplicationDbContext>, ICatalogSer
 
             _logger.LogInformation($"Found {result.TotalCount} products");
 
-            return new PaginatedItemsResponse<ProductDto>()
+            return new PaginatedItemsResponse<CatalogProductDto>()
             {
                 Count = result.TotalCount,
-                Data = result.Data.Select(_mapper.Map<ProductDto>).ToList(),
+                Data = result.Data.Select(_mapper.Map<CatalogProductDto>).ToList(),
                 PageIndex = pageIndex,
                 PageSize = pageSize
             };
         });
     }
 
-    public async Task<ProductDto> GetProductAsync(int id)
+    public async Task<CatalogProductDto> GetProductAsync(int id)
     {
         return await ExecuteSafeAsync(async () =>
         {
             var entity = await _productsRepository.GetProductByIdAsync(id);
-            var product = _mapper.Map<ProductDto>(entity);
+            var product = _mapper.Map<CatalogProductDto>(entity);
 
             _logger.LogInformation($"ProductEntity with id ({entity.Id}) successfully got from repo and mapped to dto");
 

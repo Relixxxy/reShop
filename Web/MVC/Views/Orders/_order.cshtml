@@ -1,0 +1,12 @@
+﻿@model Order
+
+<li class="orders__item">
+    <div class="orders__order">Order Number = @Model.OrderNumber</div>
+    <h3 class="orders__title">Products</h3>
+    <ul class="order__products">
+        @foreach (var product in Model.Products)
+        {
+            <partial name="_orderProduct" model="product" />
+        }
+    </ul>
+</li>

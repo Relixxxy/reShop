@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Catalog.Host.Models.Requests;
+namespace Infrastructure.Models.Requests;
 
 public class IdRequest
 {

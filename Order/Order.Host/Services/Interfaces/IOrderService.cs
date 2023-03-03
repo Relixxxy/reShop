@@ -1,4 +1,4 @@
-﻿using Order.Host.Models.Dtos;
+﻿using Infrastructure.Models.Dtos;
 
 namespace Order.Host.Services.Interfaces;
 

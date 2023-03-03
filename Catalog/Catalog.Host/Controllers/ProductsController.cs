@@ -3,6 +3,7 @@ using Catalog.Host.Models.Requests;
 using Catalog.Host.Services.Interfaces;
 using Infrastructure;
 using Infrastructure.Identity;
+using Infrastructure.Models.Requests;
 using Infrastructure.Models.Response;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

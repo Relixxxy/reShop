@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Order.Data.Entities;
-using Order.Host.Models.Dtos;
+using Infrastructure.Models.Dtos;
 
 namespace Order.Host.Mapper;
 
@@ -10,7 +10,7 @@ public class MappingProfile : Profile
     {
         CreateMap<OrderEntity, OrderDto>();
 
-        CreateMap<ProductEntity, ProductDto>();
-        CreateMap<ProductDto, ProductEntity>();
+        CreateMap<ProductEntity, OrderProductDto>();
+        CreateMap<OrderProductDto, ProductEntity>();
     }
 }

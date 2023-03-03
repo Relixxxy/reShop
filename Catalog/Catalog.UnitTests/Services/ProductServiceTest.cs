@@ -2,10 +2,10 @@
 using Catalog.Data;
 using Catalog.Data.Entities;
 using Catalog.Data.Repositories.Interfaces;
-using Catalog.Host.Models.Dtos;
 using Catalog.Host.Services;
 using Catalog.Host.Services.Interfaces;
 using FluentAssertions;
+using Infrastructure.Models.Dtos;
 using Infrastructure.Services;
 using Infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -56,7 +56,7 @@ public class ProductServiceTest
     {
         // arrange
         var id = _testProduct.Id;
-        var testResult = new ProductDto()
+        var testResult = new CatalogProductDto()
         {
             Id = id,
             Name = "Name",
@@ -69,7 +69,7 @@ public class ProductServiceTest
         };
 
         _productsRepository.Setup(s => s.GetProductByIdAsync(It.IsAny<int>())).ReturnsAsync(_testProduct);
-        _mapper.Setup(s => s.Map<ProductDto>(It.Is<ProductEntity>(i => i.Equals(_testProduct)))).Returns(testResult);
+        _mapper.Setup(s => s.Map<CatalogProductDto>(It.Is<ProductEntity>(i => i.Equals(_testProduct)))).Returns(testResult);
 
         // act
         var result = await _productsService.GetProductAsync(id);
@@ -83,10 +83,10 @@ public class ProductServiceTest
     {
         // arrange
         var id = _testProduct.Id;
-        ProductDto testResult = null!;
+        CatalogProductDto testResult = null!;
 
         _productsRepository.Setup(s => s.GetProductByIdAsync(It.IsAny<int>())).ReturnsAsync(_testProduct);
-        _mapper.Setup(s => s.Map<ProductDto>(It.Is<ProductEntity>(i => i.Equals(_testProduct)))).Returns(testResult);
+        _mapper.Setup(s => s.Map<CatalogProductDto>(It.Is<ProductEntity>(i => i.Equals(_testProduct)))).Returns(testResult);
 
         // act
         var result = await _productsService.GetProductAsync(id);

@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Basket.Host.Services.Interfaces;
 using Infrastructure.Models.Responses;
-using Basket.Host.Models;
 using Infrastructure.Models.Requests;
+using Infrastructure.Models.Dtos;
 
 namespace Basket.Host.Controllers;
 
@@ -28,10 +28,11 @@ public class BasketController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(ItemsResponse<Product>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ItemsResponse<BasketProductDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetProducts(ItemRequest<string> request)
     {
         var result = await _basketService.GetProducts(request.Item);
-        return Ok(new ItemsResponse<Product> { Items = result });
+        await _basketService.Clear(request.Item);
+        return Ok(new ItemsResponse<BasketProductDto> { Items = result });
     }
 }

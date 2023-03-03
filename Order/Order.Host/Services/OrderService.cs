@@ -2,6 +2,7 @@
 using System.Runtime;
 using AutoMapper;
 using Infrastructure.Exceptions;
+using Infrastructure.Models.Dtos;
 using Infrastructure.Models.Requests;
 using Infrastructure.Models.Responses;
 using Infrastructure.Services;
@@ -11,7 +12,6 @@ using Order.Data;
 using Order.Data.Entities;
 using Order.Data.Repositories.Interfaces;
 using Order.Host.Configurations;
-using Order.Host.Models.Dtos;
 using Order.Host.Services.Interfaces;
 
 namespace Order.Host.Services;
@@ -45,7 +45,7 @@ public class OrderService : BaseDataService<ApplicationDbContext>, IOrderService
     {
         return await ExecuteSafeAsync(async () =>
         {
-            var response = await _httpClient.SendAsync<ItemsResponse<ProductDto>, ItemRequest<string>>(
+            var response = await _httpClient.SendAsync<ItemsResponse<OrderProductDto>, ItemRequest<string>>(
                 $"{_settings.Value.BasketUrl}/getproducts",
                 HttpMethod.Post,
                 new ItemRequest<string> { Item = userId });

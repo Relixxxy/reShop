@@ -1,6 +1,6 @@
-﻿namespace Basket.Host.Models;
+﻿namespace Infrastructure.Models.Dtos;
 
-public class Product
+public class BasketProductDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;

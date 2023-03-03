@@ -1,6 +1,6 @@
-﻿namespace Catalog.Host.Models.Dtos;
+﻿namespace Infrastructure.Models.Dtos;
 
-public class ProductDto
+public class CatalogProductDto
 {
     public int Id { get; set; }
     public string Name { get; set; } = null!;
