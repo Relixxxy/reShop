@@ -1,9 +1,9 @@
 using System.Net;
-using Basket.Host.Models;
-using Infrastructure.Models.Requests;
 using Basket.Host.Services.Interfaces;
 using Infrastructure;
 using Infrastructure.Identity;
+using Infrastructure.Models.Dtos;
+using Infrastructure.Models.Requests;
 using Infrastructure.Models.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +28,7 @@ public class BasketBffController : ControllerBase
 
     [HttpPost]
     [ProducesResponseType((int)HttpStatusCode.OK)]
-    public async Task<IActionResult> AddProduct(ItemRequest<Product> request)
+    public async Task<IActionResult> AddProduct(ItemRequest<BasketProductDto> request)
     {
         _logger.LogInformation(request.ToString());
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
@@ -37,12 +37,12 @@ public class BasketBffController : ControllerBase
     }
 
     [HttpPost]
-    [ProducesResponseType(typeof(ItemsResponse<Product>), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(ItemsResponse<BasketProductDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetProducts()
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
         var result = await _basketService.GetProducts(basketId!);
-        return Ok(new ItemsResponse<Product> { Items = result });
+        return Ok(new ItemsResponse<BasketProductDto> { Items = result });
     }
 
     [HttpPost]
@@ -50,7 +50,7 @@ public class BasketBffController : ControllerBase
     public async Task<IActionResult> RemoveProduct(AmountProductRequest request)
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        await _basketService.RemoveProduct(basketId!, request);
+        await _basketService.RemoveProduct(basketId!, request.ProductId, request.Amount);
         return Ok();
     }
 }

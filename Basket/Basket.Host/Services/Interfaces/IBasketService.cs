@@ -1,11 +1,11 @@
-using Basket.Host.Models;
-using Infrastructure.Models.Requests;
+using Infrastructure.Models.Dtos;
 
 namespace Basket.Host.Services.Interfaces;
 
 public interface IBasketService
 {
-    Task AddProduct(string userId, Product product);
-    Task RemoveProduct(string userId, AmountProductRequest request);
-    Task<IEnumerable<Product>> GetProducts(string userId);
+    Task AddProduct(string userId, BasketProductDto product);
+    Task RemoveProduct(string userId, int productId, int amount);
+    Task<IEnumerable<BasketProductDto>> GetProducts(string userId);
+    Task Clear(string userId);
 }

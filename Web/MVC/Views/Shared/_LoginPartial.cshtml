@@ -1,6 +1,6 @@
 @using MVC.Services.Interfaces
 
-@inject IIdentityParser<ApplicationUser> UserManager
+@inject IIdentityParser<ApplicationUserVM> UserManager
 
 @if (Context.User.Identity!.IsAuthenticated)
 {

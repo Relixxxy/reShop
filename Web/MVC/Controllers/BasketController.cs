@@ -3,6 +3,7 @@ using MVC.ViewModels;
 
 namespace MVC.Controllers;
 
+[Authorize]
 public class BasketController : Controller
 {
     private readonly IBasketService _basketService;
@@ -25,7 +26,7 @@ public class BasketController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddProduct(Product product)
+    public async Task<IActionResult> AddProduct(ProductVM product)
     {
         await _basketService.AddProduct(product);
         return RedirectToAction(nameof(Index));

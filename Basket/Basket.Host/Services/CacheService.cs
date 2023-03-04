@@ -41,6 +41,21 @@ namespace Basket.Host.Services
                 : default !;
         }
 
+        public async Task ClearAsync(string key)
+        {
+            var redis = GetRedisDatabase();
+            var cacheKey = GetItemCacheKey(key);
+
+            if (await redis.KeyDeleteAsync(cacheKey))
+            {
+                _logger.LogInformation($"Cached value for key {key} removed");
+            }
+            else
+            {
+                _logger.LogInformation($"Cached value for key {key} not found");
+            }
+        }
+
         private string GetItemCacheKey(string userId) =>
             $"{userId}";
 
