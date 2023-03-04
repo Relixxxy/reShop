@@ -24,7 +24,7 @@
         </form>
         @if (Model.Products.Count() > 0)
         {
-            <ul class="catalog__list list">
+            <ul class="catalog__list list wrapper-light">
                 @foreach (var catalogItem in Model.Products)
                 {
                     <partial name="_product" model="catalogItem" />

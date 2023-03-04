@@ -13,7 +13,9 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    background-color: #fff3e7;
+    background-image: url(../images/homeBg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 h1,
@@ -46,7 +48,9 @@ a:hover {
 }
 
 .section {
+    background-color: #fff3e799;
     padding: 40px 0;
+    min-height: 80vh;
 }
 
 .section__title {
@@ -171,12 +175,6 @@ a:hover {
 /* ===========================   Header   =========================== */
 
 /* ===========================   Home   =========================== */
-.home {
-    background-image: url(../images/homeBg.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 100%;
-}
 
 .home__container {
     display: flex;
@@ -340,14 +338,15 @@ a:hover {
 
 
 /* ===========================   Product   =========================== */
-.product-section {
-    padding: 50px 0;
-    background-color: #fff3e7;
-}
-
 .product-form {
     display: flex;
     column-gap: 30px;
+}
+
+.product__picture {
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #fff;
 }
 
 .product__name {
@@ -361,6 +360,12 @@ a:hover {
 .product__amount {
     margin-left: 10px;
     padding-left: 5px;
+}
+
+.wrapper-light {
+    background-color: #fffb;
+    border-radius: 5px;
+    padding: 20px 10px;
 }
 
 /* ===========================   Product   =========================== */

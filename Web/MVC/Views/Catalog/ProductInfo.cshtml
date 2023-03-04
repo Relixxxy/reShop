@@ -1,13 +1,13 @@
 ﻿@model ProductVM
 
-<section class="product-section">
+<section class="product-section section">
     <div class="container">
         <h2 class="section__title">Product Info</h2>
-        <form class="product-form" asp-action="AddProduct" asp-controller="Basket" method="post">
+        <form class="product-form wrapper-light" asp-action="AddProduct" asp-controller="Basket" method="post">
             <img class="product__picture" src="@Model.PictureUrl" alt="@Model.Name" width="400" height="400" />
-            <div class="product__info-wrapper">
+            <div class="product__info-wrapper mt-3">
                 <h3 class="product__name"> @Model.Name</h3>
-                <p class="product__description">@Model.Description</p>
+                <p class="product__description mb-3">@Model.Description</p>
                 <p class="product__type"> Type: @Model.Type</p>
                 <p class="product__brand"> Brand: @Model.Brand</p>
                 <p class="product__price"> Price: @Model.Price</p>
