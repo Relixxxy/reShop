@@ -101,6 +101,11 @@ public class CatalogService : ICatalogService
             HttpMethod.Post,
             new IdRequest { Id = productId });
 
+        if (result is null)
+        {
+            return null!;
+        }
+
         var productVM = _mapper.Map<ProductVM>(result.Item);
 
         return productVM;

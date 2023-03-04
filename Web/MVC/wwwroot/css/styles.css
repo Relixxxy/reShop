@@ -16,8 +16,25 @@ body {
     background-color: #fff3e7;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+ul,
+ol {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
 a:hover {
-   text-decoration: none;
+    text-decoration: none;
 }
 
 .container {
@@ -28,6 +45,10 @@ a:hover {
     padding-right: 15px;
 }
 
+.section {
+    padding: 40px 0;
+}
+
 .section__title {
     text-align: center;
     font-size: 2rem;
@@ -36,8 +57,8 @@ a:hover {
 }
 
 .pagination-wrapper {
-    display:flex;
-    justify-content:center;
+    display: flex;
+    justify-content: center;
     margin-top: 40px;
     column-gap: 50px;
 }
@@ -149,11 +170,17 @@ a:hover {
 }
 /* ===========================   Header   =========================== */
 
-/* ===========================   Catalog   =========================== */
-.catalog {
-    padding: 40px 0;
+/* ===========================   Home   =========================== */
+.home__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
+/* ===========================   Home   =========================== */
 
+
+/* ===========================   Catalog   =========================== */
 .catalog__list {
     display: flex;
     flex-wrap: wrap;
@@ -234,10 +261,6 @@ a:hover {
 }
 /* ===========================   Catalog   =========================== */
 /* ===========================   Basket   =========================== */
-.basket {
-    background-color: #fff3e7;
-    padding: 40px 0;
-}
 
 .basket__list {
     display: flex;
@@ -319,6 +342,7 @@ a:hover {
     display: flex;
     column-gap: 30px;
 }
+
 .product__name {
     margin-bottom: 20px;
 }
@@ -334,6 +358,58 @@ a:hover {
 
 /* ===========================   Product   =========================== */
 
+/* ===========================   Orders   =========================== */
+.orders__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}
+
+.orders__item {
+    width: 100%;
+    min-height: 200px;
+    border-radius: 5px;
+    background-color: #FFF;
+    padding: 20px;
+}
+
+.orders__order {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.5rem;
+}
+
+.orders__title {
+    text-align: center;
+}
+
+.order__products {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    margin-bottom: 20px;
+}
+
+.order-products__item {
+    width: 100%;
+    border-radius: 5px;
+    background-color: #BAD7E9;
+    padding: 20px;
+}
+
+.order-products__form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-products__name {
+    width: 60%;
+}
+
+/* ===========================   Orders  =========================== */
 /* ===========================   Footer   =========================== */
 .footer {
     display: flex;
@@ -347,7 +423,7 @@ a:hover {
 .footer__container {
     display: flex;
     align-items: center;
-    justify-content:space-around;
+    justify-content: space-around;
     width: 100%;
 }
 

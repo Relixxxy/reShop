@@ -1,12 +1,12 @@
 ﻿@model OrderVM
 
 <li class="orders__item">
-    <div class="orders__order">Order Number = @Model.OrderNumber</div>
-    <h3 class="orders__title">Products</h3>
-    <ul class="order__products">
+    <h3 class="mb-4 text-center">Order #@Model.OrderNumber</h3>
+    <ul class="order__products list">
         @foreach (var product in Model.Products)
         {
             <partial name="_orderProduct" model="product" />
         }
     </ul>
+    <div class="orders__order"><span>Price: $@Model.TotalPrice</span><span>@Model.CreatedAt</span></div>
 </li>

@@ -74,7 +74,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute("default", "{controller=Catalog}/{action=Index}/{id?}");
+app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute("defaultError", "{controller=Error}/{action=Error}");
 app.MapControllers();
 
