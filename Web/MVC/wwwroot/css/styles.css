@@ -171,6 +171,13 @@ a:hover {
 /* ===========================   Header   =========================== */
 
 /* ===========================   Home   =========================== */
+.home {
+    background-image: url(../images/homeBg.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100%;
+}
+
 .home__container {
     display: flex;
     flex-direction: column;

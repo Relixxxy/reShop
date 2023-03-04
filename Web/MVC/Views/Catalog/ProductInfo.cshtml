@@ -11,7 +11,7 @@
                 <p class="product__type"> Type: @Model.Type</p>
                 <p class="product__brand"> Brand: @Model.Brand</p>
                 <p class="product__price"> Price: @Model.Price</p>
-                <div>Amount: <input class="product__amount" asp-for="@Model.Amount" name="amount" type="number" id="amount-input" min="0" max="@Model.Amount" /></div>
+                <div>Amount: <input class="product__amount" asp-for="@Model.Amount" name="amount" type="number" id="amount-input" min="1" max="@Model.Amount" value="1"/></div>
                 
                 <button type="submit" class="button product__button">Add to Basket</button>
             </div>
