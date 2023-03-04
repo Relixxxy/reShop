@@ -96,6 +96,16 @@ public class CatalogServiceTest
         result?.Count.Should().Be(testTotalCount);
         result?.PageIndex.Should().Be(testPageIndex);
         result?.PageSize.Should().Be(testPageSize);
+
+        _logger.Verify(
+            x => x.Log(
+                LogLevel.Information,
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, t) => o.ToString() !
+                    .Contains($"products")),
+                It.IsAny<Exception>(),
+                It.IsAny<Func<It.IsAnyType, Exception, string>>() !),
+            Times.Once);
     }
 
     [Fact]
@@ -117,6 +127,16 @@ public class CatalogServiceTest
 
         // assert
         result.Should().BeNull();
+
+        _logger.Verify(
+            x => x.Log(
+                LogLevel.Warning,
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, t) => o.ToString() !
+                    .Contains($"Products not found")),
+                It.IsAny<Exception>(),
+                It.IsAny<Func<It.IsAnyType, Exception, string>>() !),
+            Times.Once);
     }
 
     [Fact]
@@ -144,6 +164,16 @@ public class CatalogServiceTest
 
         // assert
         result.Should().Be(testResult);
+
+        _logger.Verify(
+            x => x.Log(
+                LogLevel.Information,
+                It.IsAny<EventId>(),
+                It.Is<It.IsAnyType>((o, t) => o.ToString() !
+                    .Contains($"successfully got")),
+                It.IsAny<Exception>(),
+                It.IsAny<Func<It.IsAnyType, Exception, string>>() !),
+            Times.Once);
     }
 
     [Fact]
@@ -161,5 +191,103 @@ public class CatalogServiceTest
 
         // assert
         result.Should().Be(testResult);
+    }
+
+    [Fact]
+    public async Task GetBrandsAsync_Success()
+    {
+        // arrange
+        var brands = new List<string>() { "brand1", "brand2" };
+
+        _productsRepository.Setup(s => s.GetBrandsAsync()).ReturnsAsync(brands);
+
+        // act
+        var result = await _catalogService.GetBrandsAsync();
+
+        // assert
+        result.Should().Contain(brands);
+        _logger.Verify(
+           x => x.Log(
+               LogLevel.Information,
+               It.IsAny<EventId>(),
+               It.Is<It.IsAnyType>((o, t) => o.ToString() !
+                   .Contains($"Found")),
+               It.IsAny<Exception>(),
+               It.IsAny<Func<It.IsAnyType, Exception, string>>() !),
+           Times.Once);
+    }
+
+    [Fact]
+    public async Task GetBrandsAsync_Failed()
+    {
+        // arrange
+        var expectedBrands = new List<string>() { "brand1", "brand2" };
+        var actualBrands = new List<string>() { "brand3", "brand4" };
+
+        _productsRepository.Setup(s => s.GetBrandsAsync()).ReturnsAsync(actualBrands);
+
+        // act
+        var result = await _catalogService.GetBrandsAsync();
+
+        // assert
+        result.Should().NotContain(expectedBrands);
+        _logger.Verify(
+           x => x.Log(
+               LogLevel.Information,
+               It.IsAny<EventId>(),
+               It.Is<It.IsAnyType>((o, t) => o.ToString() !
+                   .Contains($"Found")),
+               It.IsAny<Exception>(),
+               It.IsAny<Func<It.IsAnyType, Exception, string>>() !),
+           Times.Once);
+    }
+
+    [Fact]
+    public async Task GetTypesAsync_Success()
+    {
+        // arrange
+        var types = new List<string>() { "type1", "type2" };
+
+        _productsRepository.Setup(s => s.GetTypesAsync()).ReturnsAsync(types);
+
+        // act
+        var result = await _catalogService.GetTypesAsync();
+
+        // assert
+        result.Should().Contain(types);
+        _logger.Verify(
+           x => x.Log(
+               LogLevel.Information,
+               It.IsAny<EventId>(),
+               It.Is<It.IsAnyType>((o, t) => o.ToString() !
+                   .Contains($"Found")),
+               It.IsAny<Exception>(),
+               It.IsAny<Func<It.IsAnyType, Exception, string>>() !),
+           Times.Once);
+    }
+
+    [Fact]
+    public async Task GetTypesAsync_Failed()
+    {
+        // arrange
+        var expectedTypes = new List<string>() { "type1", "type2" };
+        var actualTypes = new List<string>() { "type3", "type4" };
+
+        _productsRepository.Setup(s => s.GetTypesAsync()).ReturnsAsync(actualTypes);
+
+        // act
+        var result = await _catalogService.GetTypesAsync();
+
+        // assert
+        result.Should().NotContain(expectedTypes);
+        _logger.Verify(
+           x => x.Log(
+               LogLevel.Information,
+               It.IsAny<EventId>(),
+               It.Is<It.IsAnyType>((o, t) => o.ToString() !
+                   .Contains($"Found")),
+               It.IsAny<Exception>(),
+               It.IsAny<Func<It.IsAnyType, Exception, string>>() !),
+           Times.Once);
     }
 }
