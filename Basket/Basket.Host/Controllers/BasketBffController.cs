@@ -32,7 +32,7 @@ public class BasketBffController : ControllerBase
     {
         _logger.LogInformation(request.ToString());
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        await _basketService.AddProduct(basketId!, request.Item);
+        await _basketService.AddProductAsync(basketId!, request.Item);
         return Ok();
     }
 
@@ -41,7 +41,7 @@ public class BasketBffController : ControllerBase
     public async Task<IActionResult> GetProducts()
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        var result = await _basketService.GetProducts(basketId!);
+        var result = await _basketService.GetProductsAsync(basketId!);
         return Ok(new ItemsResponse<BasketProductDto> { Items = result });
     }
 
@@ -50,7 +50,7 @@ public class BasketBffController : ControllerBase
     public async Task<IActionResult> RemoveProduct(AmountProductRequest request)
     {
         var basketId = User.Claims.FirstOrDefault(x => x.Type == "sub")?.Value;
-        await _basketService.RemoveProduct(basketId!, request.ProductId, request.Amount);
+        await _basketService.RemoveProductAsync(basketId!, request.ProductId, request.Amount);
         return Ok();
     }
 }

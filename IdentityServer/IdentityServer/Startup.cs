@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using IdentityServer4.Quickstart.UI;
-using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;

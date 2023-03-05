@@ -43,8 +43,6 @@ public class HttpClientService : IHttpClientService
 
         var result = await client.SendAsync(httpMessage);
 
-        _logger.LogInformation(await result.Content.ReadAsStringAsync());
-
         if (result.IsSuccessStatusCode)
         {
             var resultContent = await result.Content.ReadAsStringAsync();
