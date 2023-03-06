@@ -103,10 +103,13 @@ public class CatalogService : ICatalogService
 
         if (result is null)
         {
+            _logger.LogWarning("Received null");
             return null!;
         }
 
         var productVM = _mapper.Map<ProductVM>(result.Item);
+
+        _logger.LogInformation($"Received product with id {result.Item.Id} and mapped to VM");
 
         return productVM;
     }

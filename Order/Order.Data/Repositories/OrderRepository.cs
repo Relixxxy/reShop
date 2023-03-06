@@ -14,7 +14,7 @@ public class OrderRepository : IOrderRepository
         _context = dbContextWrapper.DbContext;
     }
 
-    public async Task<int?> CreateOrderAsync(string userId, int orderNumber, decimal totalPrice, DateTime createdAt, IEnumerable<ProductEntity> products)
+    public async Task<int?> CreateOrderAsync(string userId, string orderNumber, decimal totalPrice, DateTime createdAt, IEnumerable<ProductEntity> products)
     {
         var order = new OrderEntity()
         {

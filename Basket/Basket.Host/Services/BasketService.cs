@@ -1,4 +1,3 @@
-using Infrastructure.Models.Requests;
 using Basket.Host.Services.Interfaces;
 using Infrastructure.Models.Dtos;
 
@@ -15,14 +14,14 @@ public class BasketService : IBasketService
         _logger = logger;
     }
 
-    public async Task AddProduct(string userId, BasketProductDto product)
+    public async Task AddProductAsync(string userId, BasketProductDto product)
     {
         if (product.Amount <= 0)
         {
             return;
         }
 
-        var products = (await GetProducts(userId)).ToList();
+        var products = (await GetProductsAsync(userId)).ToList();
 
         var existingProduct = products.FirstOrDefault(p => p.Id == product.Id);
 
@@ -40,12 +39,13 @@ public class BasketService : IBasketService
         _logger.LogInformation($"Product {product.Name} added");
     }
 
-    public async Task Clear(string userId)
+    public async Task ClearAsync(string userId)
     {
         await _cacheService.ClearAsync(userId);
+        _logger.LogInformation($"Cache cleared");
     }
 
-    public async Task<IEnumerable<BasketProductDto>> GetProducts(string userId)
+    public async Task<IEnumerable<BasketProductDto>> GetProductsAsync(string userId)
     {
         var products = await _cacheService.GetAsync<IEnumerable<BasketProductDto>>(userId);
 
@@ -59,9 +59,9 @@ public class BasketService : IBasketService
         return products;
     }
 
-    public async Task RemoveProduct(string userId, int productId, int amount)
+    public async Task RemoveProductAsync(string userId, int productId, int amount)
     {
-        var products = await GetProducts(userId);
+        var products = await GetProductsAsync(userId);
 
         var existingProduct = products.FirstOrDefault(p => p.Id == productId);
 

@@ -31,8 +31,8 @@ public class BasketController : ControllerBase
     [ProducesResponseType(typeof(ItemsResponse<BasketProductDto>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetProducts(ItemRequest<string> request)
     {
-        var result = await _basketService.GetProducts(request.Item);
-        await _basketService.Clear(request.Item);
+        var result = await _basketService.GetProductsAsync(request.Item);
+        await _basketService.ClearAsync(request.Item);
         return Ok(new ItemsResponse<BasketProductDto> { Items = result });
     }
 }

@@ -7,6 +7,7 @@ using Infrastructure.Models.Requests;
 using Infrastructure.Models.Responses;
 using Infrastructure.Services;
 using Infrastructure.Services.Interfaces;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Options;
 using Order.Data;
 using Order.Data.Entities;
@@ -58,7 +59,8 @@ public class OrderService : BaseDataService<ApplicationDbContext>, IOrderService
                 throw new BusinessException("Can't create order with 0 items");
             }
 
-            var orderNumber = DateTime.Now.Millisecond;
+            var orderNumber = GetRandomOrderNumber();
+
             var totalPrice = response.Items.Sum(p => p.Price * p.Amount);
             var productEntities = response.Items.Select(_mapper.Map<ProductEntity>).ToList();
 
@@ -74,5 +76,10 @@ public class OrderService : BaseDataService<ApplicationDbContext>, IOrderService
             var orders = orderEntities.Select(_mapper.Map<OrderDto>).ToList();
             return orders;
         });
+    }
+
+    private string GetRandomOrderNumber()
+    {
+        return $"{DateTime.Now:ddHHmmss}-{Random.Shared.Next(0, 999):000}-{Guid.NewGuid().ToString().Substring(0, 4)}";
     }
 }

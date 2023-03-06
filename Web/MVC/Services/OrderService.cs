@@ -1,4 +1,6 @@
-﻿using Infrastructure.Models.Response;
+﻿using AutoMapper;
+using Infrastructure.Models.Dtos;
+using Infrastructure.Models.Response;
 using Infrastructure.Models.Responses;
 using MVC.Services.Interfaces;
 using MVC.ViewModels;
@@ -10,12 +12,14 @@ public class OrderService : IOrderService
     private readonly IHttpClientService _httpClient;
     private readonly ILogger<OrderService> _logger;
     private readonly IOptions<AppSettings> _settings;
+    private readonly IMapper _mapper;
 
-    public OrderService(IHttpClientService httpClient, ILogger<OrderService> logger, IOptions<AppSettings> settings)
+    public OrderService(IHttpClientService httpClient, ILogger<OrderService> logger, IOptions<AppSettings> settings, IMapper mapper)
     {
         _httpClient = httpClient;
         _logger = logger;
         _settings = settings;
+        _mapper = mapper;
     }
 
     public async Task<int?> CreateOrderAsync()
@@ -34,13 +38,15 @@ public class OrderService : IOrderService
 
     public async Task<IEnumerable<OrderVM>> GetOrdersAsync()
     {
-        var result = await _httpClient.SendAsync<ItemsResponse<OrderVM>, object>(
+        var result = await _httpClient.SendAsync<ItemsResponse<OrderDto>, object>(
             $"{_settings.Value.OrderUrl}/getorders",
             HttpMethod.Post,
             new { });
 
-        _logger.LogInformation($"Received {result.Items.Count()} orders from orderbff");
+        var orders = result.Items.Select(_mapper.Map<OrderVM>);
 
-        return result.Items;
+        _logger.LogInformation($"Received {result.Items.Count()} orders from orderbff and mapped to vm");
+
+        return orders;
     }
 }
