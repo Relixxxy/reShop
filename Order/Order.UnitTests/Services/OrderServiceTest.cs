@@ -74,7 +74,7 @@ public class OrderServiceTest
                 HttpMethod.Post,
                 It.IsAny<ItemRequest<string>>())).ReturnsAsync(response);
 
-        _orderRepositoryMock.Setup(x => x.CreateOrderAsync(userId, It.IsAny<int>(), It.IsAny<decimal>(), It.IsAny<DateTime>(), It.IsAny<List<ProductEntity>>())).ReturnsAsync(1);
+        _orderRepositoryMock.Setup(x => x.CreateOrderAsync(userId, It.IsAny<string>(), It.IsAny<decimal>(), It.IsAny<DateTime>(), It.IsAny<List<ProductEntity>>())).ReturnsAsync(1);
 
         // Act
         var result = await _orderService.CreateOrderAsync(userId);

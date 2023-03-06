@@ -1,7 +1,7 @@
 ﻿@model OrderVM
 
 <li class="orders__item">
-    <h3 class="mb-4 text-center">Order #@Model.OrderNumber</h3>
+    <h3 class="mb-4 text-center">Order # <span class="h4">@Model.OrderNumber</span></h3>
     <ul class="order__products list">
         @foreach (var product in Model.Products)
         {

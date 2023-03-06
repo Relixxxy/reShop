@@ -218,8 +218,8 @@ public class CatalogServiceTests
                 It.IsAny<HttpMethod>(),
                 It.IsAny<IdRequest>()))
             .ReturnsAsync(itemResponse);
-        _mapperMock
-            .Setup(x => x.Map<ProductVM>(productDto))
+
+        _mapperMock.Setup(x => x.Map<ProductVM>(productDto))
             .Returns(new ProductVM
             {
                 Id = productDto.Id,
