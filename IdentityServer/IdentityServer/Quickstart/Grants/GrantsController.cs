@@ -76,7 +76,7 @@ namespace IdentityServer4.Quickstart.UI
                         ClientId = client.ClientId,
                         ClientName = client.ClientName ?? client.ClientId,
                         ClientLogoUrl = client.LogoUri,
-                        ClientUrl = client.ClientUri,
+                        MvcUrl = client.ClientUri,
                         Created = grant.CreationTime,
                         Expires = grant.Expiration,
                         IdentityGrantNames = resources.IdentityResources.Select(x => x.DisplayName ?? x.Name).ToArray(),

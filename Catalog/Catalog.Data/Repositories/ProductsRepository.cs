@@ -3,7 +3,6 @@ using Catalog.Data.Repositories.Interfaces;
 using Infrastructure.Exceptions;
 using Infrastructure.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 
 namespace Catalog.Data.Repositories;
 
@@ -33,9 +32,7 @@ public class ProductsRepository : IProductsRepository
 
         await _context.SaveChangesAsync();
 
-        var id = result.Entity.Id;
-
-        return id;
+        return result.Entity.Id;
     }
 
     public async Task<bool> DeleteProductAsync(int id)
@@ -113,5 +110,17 @@ public class ProductsRepository : IProductsRepository
         await _context.SaveChangesAsync();
 
         return true;
+    }
+
+    public async Task<IEnumerable<string>> GetTypesAsync()
+    {
+        var types = await _context.Products.Select(p => p.Type).Distinct().ToListAsync();
+        return types;
+    }
+
+    public async Task<IEnumerable<string>> GetBrandsAsync()
+    {
+        var brands = await _context.Products.Select(p => p.Brand).Distinct().ToListAsync();
+        return brands;
     }
 }

@@ -1,0 +1,39 @@
+﻿@model ProductVM
+
+<li class="tablelist__item">
+    <div class="tablelist__image-wrapper">
+        <img class="tablelist__image" src="@Model.PictureUrl" alt="@Model.Name" width="250" height="250"/>
+    </div>
+    <div class="tablelist__info-wrapper">
+        <div class="tablelist__info">
+            <div class="tablelist__name">
+                <h6>Name:</h6>
+                <span class="">@Model.Name</span>
+            </div>
+            <div class="tablelist__type">
+                <h6>Type:</h6>
+                <span>@Model.Type</span>
+            </div>
+            <div class="tablelist__brand">
+                <h6>Brand:</h6>
+                <span>@Model.Brand</span>
+            </div>
+        </div>
+        <div class="tablelist__price">
+            <div class="tablelist-totalprice">
+                <h6>Total price:</h6>
+                <span>@(Model.Price * Model.Amount)</span>
+            </div>
+            <div class="tablelist-amount">
+                <h6>Amount:</h6>
+                <span>@Model.Amount</span>
+            </div>
+            <form asp-action="RemoveProduct" asp-controller="Basket" method="post" class="tablelist__button-wrapper">
+                <input type="hidden" asp-for="@Model.Id" name="id" />
+                <input type="hidden" asp-for="@Model.Amount" name="amount" />
+                    <button type="submit" class="button tablelist_button">Remove</button>
+            </form>
+        </div>
+    </div>
+</li>
+

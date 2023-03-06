@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ProductVM>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<section class="section basket">
+    <div class="container">
+        <h2 class="section__title">Basket</h2>
+        @if (Model.Count() > 0)
+        {
+            <ul class="basket__list list tablelist">
+                @foreach (var product in Model)
+                {
+                    <partial name="_tableProduct" model="product" />
+                }
+            </ul>
+            <form class="order-form wrapper-light" asp-action="CreateOrder" asp-controller="Orders">
+                <span class="order-form__totalprice">Total Price: @Model.Sum(p => p.Price * p.Amount)</span>
+                <button type="submit" class="button">Order</button>
+            </form>
+        }
+        else
+        {
+            <h3 class="m-5">Basket is empty</h3>
+        }
+    </div>
+</section>

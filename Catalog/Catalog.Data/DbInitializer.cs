@@ -1,5 +1,4 @@
-﻿using Catalog.Data;
-using Catalog.Data.Entities;
+﻿using Catalog.Data.Entities;
 
 namespace Catalog.Data;
 

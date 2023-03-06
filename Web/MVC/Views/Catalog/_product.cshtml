@@ -1,0 +1,17 @@
+﻿@model ProductVM
+
+<li class="catalog__item">
+    <form class="product-form" asp-action="ProductInfo" asp-controller="Catalog" method="post">
+        <button class="catalog__link" type="submit" data-modal-open>
+            <img width="300"
+                 height="300"
+                 src="@Model.PictureUrl"
+                 alt="@Model.Name"
+                 class="catalog__image" />
+            <h4 class="catalog__name">@Model.Name</h4>
+            <p class="catalog__price">$@Model.Price.ToString("N2")9</p>
+
+            <input type="hidden" asp-for="@Model.Id" name="productId" />
+        </button>
+    </form>
+</li>

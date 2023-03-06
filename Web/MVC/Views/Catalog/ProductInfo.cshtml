@@ -1,0 +1,29 @@
+﻿@model ProductVM
+
+<section class="product-section section">
+    <div class="container">
+        <h2 class="section__title">Product Info</h2>
+        <form class="product-form wrapper-light" asp-action="AddProduct" asp-controller="Basket" method="post">
+            <img class="product__picture" src="@Model.PictureUrl" alt="@Model.Name" width="400" height="400" />
+            <div class="product__info-wrapper mt-3">
+                <h3 class="product__name"> @Model.Name</h3>
+                <p class="product__description mb-3">@Model.Description</p>
+                <p class="product__type"> Type: @Model.Type</p>
+                <p class="product__brand"> Brand: @Model.Brand</p>
+                <p class="product__price"> Price: @Model.Price</p>
+                <div>Amount: <input class="product__amount" asp-for="@Model.Amount" name="amount" type="number" id="amount-input" min="1" max="@Model.Amount" value="1"/></div>
+                
+                <button type="submit" class="button product__button">Add to Basket</button>
+            </div>
+            <input type="hidden" asp-for="@Model.Id" name="id" />
+            <input type="hidden" asp-for="@Model.PictureUrl" name="pictureUrl" />
+            <input type="hidden" asp-for="@Model.Name" name="name" />
+            <input type="hidden" asp-for="@Model.Description" name="description" />
+            <input type="hidden" asp-for="@Model.Price" name="price" />
+            <input type="hidden" asp-for="@Model.Type" name="type" />
+            <input type="hidden" asp-for="@Model.Brand" name="brand" />
+        </form>
+    </div>
+</section>
+
+

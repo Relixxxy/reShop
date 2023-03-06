@@ -1,6 +1,5 @@
 ﻿using System.IO;
 using IdentityServer4.Quickstart.UI;
-using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
@@ -37,7 +36,7 @@ namespace IdentityServer
             app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Strict });
             app.UseStaticFiles();
             app.UseRouting();
-            
+
             app.UseAuthentication();
             app.UseAuthorization();
             

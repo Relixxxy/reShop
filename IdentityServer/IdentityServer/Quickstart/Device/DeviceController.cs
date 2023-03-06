@@ -177,7 +177,7 @@ namespace IdentityServer4.Quickstart.UI.Device
                 ScopesConsented = model?.ScopesConsented ?? Enumerable.Empty<string>(),
                 
                 ClientName = client.ClientName ?? client.ClientId,
-                ClientUrl = client.ClientUri,
+                MvcUrl = client.ClientUri,
                 ClientLogoUrl = client.LogoUri,
                 AllowRememberConsent = client.AllowRememberConsent
             };

@@ -1,0 +1,13 @@
+﻿@using MVC.Services.Interfaces;
+@inject IIdentityParser<ApplicationUserVM> UserManager
+
+<section class="section home">
+    <div class="container home__container">
+        <h3 class="section__title">Welcome to <span class="logo">reShop</span></h3>
+        @if (!Context.User.Identity!.IsAuthenticated)
+        {
+            <h4 class="mb-3">Please login to use it to the fullest.</h4>
+        }
+        <img src="./images/guitarsHome.png" alt="Guitars" width="600" />
+    </div>
+</section>

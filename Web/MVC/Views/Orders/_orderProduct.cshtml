@@ -1,0 +1,10 @@
+﻿@model OrderProductDto
+
+<li class="order-products__item">
+    <form class="order-products__form" asp-controller="Catalog" asp-action="ProductInfo">
+        <h4 class="order-products__name">@Model.Name</h4>
+        <h5 class="order-products__price">$@Model.Price x @Model.Amount</h5>
+        <button type="submit" class="button order-products__button">Details</button>
+        <input type="hidden" asp-for="ProductId" name="productId"/>
+    </form>  
+</li>

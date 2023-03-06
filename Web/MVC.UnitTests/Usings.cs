@@ -1,0 +1,14 @@
+global using System.Net;
+global using System.Net.Http;
+global using System.Text;
+global using System.Threading;
+global using System.Threading.Tasks;
+global using Xunit;
+global using FluentAssertions;
+global using IdentityModel;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.Extensions.Logging;
+global using Moq;
+global using MVC.Services;
+global using MVC.Services.Interfaces;
+global using Newtonsoft.Json;
