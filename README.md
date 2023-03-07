@@ -1,8 +1,7 @@
-## reShop
-Microservice Architecture Project README
+# reShop
 This repository contains the implementation of a microservice architecture project in .NET. The architecture of this project is composed of several microservices and other components, such as an MVC web application, an Identity Provider, a Proxy/Cdn, a Provider Cache, and a Database Server.
 
-#Architecture Overview
+# Architecture Overview
 The project consists of the following microservices:
 
 Catalog: This microservice is responsible for managing product catalogs.
